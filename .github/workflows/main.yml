@@ -26,8 +26,12 @@ jobs:
     - name: Commit and Push changes
       run: |
         echo $(date +'%Y%m%d') > date.txt
-        git add .
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        git commit -am "$(date +'%Y%m%d')"
-        git push -v --progress
+        git add date.txt
+        if ! git diff-index --quiet HEAD --; then
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git commit -am "$(date +'%Y%m%d')"
+          git push -v --progress
+        else
+          echo "没有任何更改"
+        fi
