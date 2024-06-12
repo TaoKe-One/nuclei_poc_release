@@ -35,3 +35,4 @@ jobs:
         git config --local user.name "GitHub Action"
         git commit -am "$(date +'%Y%m%d')"
         git push -v --progress
+      continue-on-error: true
