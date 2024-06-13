@@ -1,8 +1,69 @@
 version: '3'
 
 services:
-  app:
+  db:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    volumes:
+      - db_data:/var/lib/postgresql/data
+  redis:
+    image: redis:latest
+    restart: always
+
+  web:
     build: .
-    image: cve-2022-22963
+    restart: always
+    image: ghcr.io/bitthebyte/monitorizer:main
+    command: /webserver-entrypoint.sh
+    environment:
+      POSTGRES_HOST: db
+      CELERY_BROKER_URL: 'redis://redis:6379/0'
+      CELERY_RESULT_BACKEND: 'redis://redis:6379/0'
     ports:
-      - 8080:8080
+      - "8000:8000"
+    depends_on:
+      - db
+
+  beat_worker:
+    restart: always
+    image: ghcr.io/bitthebyte/monitorizer:main
+    command: celery -A monitorizer.server beat -l info
+    depends_on:
+      - db
+    environment:
+      CELERY_BROKER_URL: 'redis://redis:6379/0'
+      CELERY_RESULT_BACKEND: 'redis://redis:6379/0'
+      POSTGRES_HOST: db
+
+  report_worker:
+    restart: always
+    image: ghcr.io/bitthebyte/monitorizer:main
+    command: celery -A monitorizer.server worker -Q reports -l info
+    depends_on:
+      - db
+    environment:
+      CELERY_BROKER_URL: 'redis://redis:6379/0'
+      CELERY_RESULT_BACKEND: 'redis://redis:6379/0'
+      POSTGRES_HOST: db
+
+  job_worker:
+    restart: always
+    privileged: true
+    image: ghcr.io/bitthebyte/monitorizer:main
+    command: celery -A monitorizer.server worker -Q default -l info
+    depends_on:
+      - db
+    environment:
+      CELERY_BROKER_URL: 'redis://redis:6379/0'
+      CELERY_RESULT_BACKEND: 'redis://redis:6379/0'
+      POSTGRES_HOST: db
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /home/.monitorizer:/home/.monitorizer:shared
+
+volumes:
+  db_data:

@@ -7,7 +7,7 @@ info:
 requests:
 
   - payloads:
-      dirt: /mnt/d/tools/alltest/myopen/payload/PayloadsAllTheThings/DirectoryTraversal/Intruder/traversals-8-deep-exotic-encoding.txt
+      dirt: helpers/wordlists/traversals-8-deep-exotic-encoding.txt
 
 
 
