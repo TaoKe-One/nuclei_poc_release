@@ -14,7 +14,7 @@ Nuclei POC，每日更新
 克隆这个项目到本地：
 
 ```bash
-git clone https://github.com/adysec/nuclei_poc](https://github.com/TaoKe-One/nuclei_poc_release.git
+git clone https://github.com:TaoKe-One/nuclei_poc_release.git
 ```
 
 进入项目目录：
