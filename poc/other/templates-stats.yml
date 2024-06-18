@@ -10,10 +10,14 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
-      - uses: actions/setup-go@v2
+      - uses: actions/checkout@v4
         with: 
-          go-version: 1.18
+          fetch-depth: 0
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: 1.19
 
       - name: Installing Template Stats
         run: |
@@ -22,17 +26,17 @@ jobs:
 
       - name: Markdown Stats
         run: |
-          templates-stats -output TEMPLATES-STATS.md -path /home/runner/work/nuclei-templates/nuclei-templates/
+          templates-stats -output TEMPLATES-STATS.md -path /home/runner/work/custom-nuclei-templates/custom-nuclei-templates/
         shell: bash
 
       - name: JSON Stats
         run: |
-          templates-stats -output TEMPLATES-STATS.json -json -path /home/runner/work/nuclei-templates/nuclei-templates/
+          templates-stats -output TEMPLATES-STATS.json -json -path /home/runner/work/custom-nuclei-templates/custom-nuclei-templates/
         shell: bash
 
       - name: Top 10 Stats
         run: |
-          templates-stats -output TOP-10.md -top 10 -path /home/runner/work/nuclei-templates/nuclei-templates/
+          templates-stats -output TOP-10.md -top 10 -path /home/runner/work/custom-nuclei-templates/custom-nuclei-templates/
         shell: bash
 
       - name: Get statistical changes
@@ -52,4 +56,3 @@ jobs:
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: master
