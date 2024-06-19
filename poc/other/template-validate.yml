@@ -1,29 +1,23 @@
 name: 🛠 Template Validate
 
-on: [ push, pull_request ]
+on:
+  pull_request:
+    paths:
+      - '**.go'
+  workflow_dispatch:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest-16-cores
     steps:
-      - uses: actions/checkout@v2
-
-      - name: Get Github tag
-        id: meta
-        run: |
-          curl --silent "https://api.github.com/repos/projectdiscovery/nuclei/releases/latest" | jq -r .tag_name | xargs -I {} echo TAG={} >> $GITHUB_OUTPUT
-
-      - name: Setup Nuclei
-        if: steps.meta.outputs.TAG != ''
-        env:
-          VERSION: ${{ steps.meta.outputs.TAG }}
-        run: |
-          wget -q https://github.com/projectdiscovery/nuclei/releases/download/${VERSION}/nuclei_${VERSION:1}_linux_amd64.zip
-          sudo unzip nuclei*.zip -d /usr/local/bin
-        working-directory: /tmp
+      - uses: actions/checkout@v3
+      - uses: actions/setup-go@v4
+        with: 
+          go-version: 1.20.x
 
       - name: Template Validation
         run: |
-          cp -r ${{ github.workspace }} $HOME
-          nuclei -validate
-          nuclei -validate -w ./workflows
+          go run . -ut
+          go run . -validate
+          go run . -validate -w workflows
+        working-directory: v2/cmd/nuclei/

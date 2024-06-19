@@ -1,17 +1,15 @@
 id: webmin-panel
-
 info:
   name: Webmin Admin Panel
   author: PR3R00T
   severity: info
   tags: panel,webmin
-
 requests:
   - method: GET
     path:
       - "{{BaseURL}}"
       - "{{BaseURL}}/webmin/"
-    host-redirects: true
+    redirects: true
     matchers:
       - type: word
         words:
