@@ -3,7 +3,7 @@ id: crxde
 info:
   name: CRXDE Lite
   author: nadino
-  severity: info
+  severity: medium
 
 requests:
   - method: GET
