@@ -13,7 +13,6 @@ requests:
     headers:
       CQ-Handle: /content
       CQ-Path: /content
-    matchers-condition: and
     matchers:
       - type: word
         words:
