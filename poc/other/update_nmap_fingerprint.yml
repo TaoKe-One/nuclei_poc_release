@@ -3,7 +3,7 @@ name: 📝 Nmap FingerPrint Update
 on:
   push:
     paths:
-      - 'service-fingerprint'
+      - 'service_fingerprint'
 
 jobs:
   build:
