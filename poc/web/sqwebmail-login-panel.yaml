@@ -7,14 +7,14 @@ info:
   description: SqWebMail login panel was detected.
   classification:
     cvss-metrics: CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:N
+    cvss-score: 0.0
     cwe-id: CWE-200
   metadata:
-    max-request: 2
-    shodan-query: title:"SqWebMail"
     verified: true
+    shodan-query: title:"SqWebMail"
   tags: webmail,sqwebmail,panel
 
-http:
+requests:
   - method: GET
     path:
       - "{{BaseURL}}/cgi-bin/sqwebmail"
@@ -23,10 +23,11 @@ http:
     host-redirects: true
     max-redirects: 2
     stop-at-first-match: true
-
     matchers-condition: and
     matchers:
+
       - type: word
         words:
           - "SqWebMail - Copyright"
-# digest: 4a0a0047304502204758f1df104e7c9b98fca65fadc53d0f754bd6bb3680a370d8a1174df7098cfb022100e33eb7a2627d36f11bb94d5792a3f09375afd8251c26c8fc96393c77d0a7cb06:922c64590222798bb761d5b6d8e72950
+
+# Enhanced by md on 2023/01/14
