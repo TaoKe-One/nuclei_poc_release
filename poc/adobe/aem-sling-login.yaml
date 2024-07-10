@@ -12,13 +12,12 @@ info:
     cvss-score: 0.0
     cwe-id: CWE-200
   metadata:
-    max-request: 1
     shodan-query:
       - http.title:"AEM Sign In"
       - http.component:"Adobe Experience Manager"
   tags: panel,aem,adobe,sling
 
-http:
+requests:
   - method: GET
     path:
       - "{{BaseURL}}/system/sling/cqform/defaultlogin.html"
