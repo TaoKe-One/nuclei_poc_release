@@ -8,10 +8,11 @@ info:
   classification:
     cwe-id: CWE-200
   metadata:
+    max-request: 1
     fofa-query: title="Apache APISIX Dashboard"
   tags: apache,apisix,panel
 
-requests:
+http:
   - method: GET
     path:
       - "{{BaseURL}}/user/login?redirect=%2F"
