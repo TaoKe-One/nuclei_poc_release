@@ -2,7 +2,7 @@ id: rancher-panel
 
 info:
   name: Rancher Login Panel - Detect
-  author: princechaddha,idealphase,ritikchaddha
+  author: princechaddha, idealphase
   severity: info
   description: Rancher login panel was detected.
   reference:
@@ -10,17 +10,14 @@ info:
     - https://rancher.com/
   classification:
     cvss-metrics: CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:N
+    cvss-score: 0.0
     cwe-id: CWE-200
-    cpe: cpe:2.3:a:suse:rancher:*:*:*:*:*:*:*:*
   metadata:
-    max-request: 1
-    product: rancher
-    shodan-query: http.favicon.hash:464587962
-    vendor: suse
     verified: true
-  tags: panel,rancher,kubernetes,devops,cloud,login,suse
+    shodan-query: http.title:"Loading?"
+  tags: panel,rancher,kubernetes,devops,cloud,login
 
-http:
+requests:
   - method: GET
     path:
       - "{{BaseURL}}"
@@ -30,7 +27,7 @@ http:
       - type: word
         part: body
         words:
-          - "<title>Loading"
+          - "<title>Loading?</title>"
           - "ember-basic-dropdown-wormhole"
         condition: and
 
@@ -44,4 +41,5 @@ http:
         group: 1
         regex:
           - '<!\-\- ([0-9. ]+)\-\->'
-# digest: 4a0a00473045022100bae14373241a41e98b1f4d70bf8c9cdc2469648473672ab0b8e3be838d03a166022079a4b043a8e29f705e93bcc71021ab36beb4e0657709d3bfbc8b99330a3d449f:922c64590222798bb761d5b6d8e72950
+
+# Enhanced by md on 2022/12/07
