@@ -7,13 +7,16 @@ info:
   description: Apache Kafka Control Center login panel was detected.
   classification:
     cvss-metrics: CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:N
-    cvss-score: 0.0
     cwe-id: CWE-200
+    cpe: cpe:2.3:a:apache:kafka:*:*:*:*:*:*:*:*
   metadata:
+    max-request: 1
+    product: kafka
     shodan-query: http.title:"Kafka Center"
-  tags: panel,kafka
+    vendor: apache
+  tags: panel,kafka,apache
 
-requests:
+http:
   - method: GET
     path:
       - '{{BaseURL}}'
@@ -24,5 +27,4 @@ requests:
       - type: word
         words:
           - '<title>Kafka Center</title>'
-
-# Enhanced by md on 2022/11/22
+# digest: 490a0046304402202702de822e844b704e7cd9a92f556d417ca7c7f626d7fb0127b04767a81ae4c202207ba8956ee17d5e9191684d0a8d63bf1d725244b813992ddd3adb4e8d6483eef5:922c64590222798bb761d5b6d8e72950
