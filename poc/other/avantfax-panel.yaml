@@ -7,16 +7,18 @@ info:
   description: An AvantFAX login panel was discovered.
   reference:
     - http://www.avantfax.com/
-  metadata:
-    shodan-query: http.title:"AvantFAX - Login"
-  tags: panel,avantfax,login
   classification:
-    cvss-metrics: CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N
-    cvss-score: 5.3
-    cve-id:
-    cwe-id: CWE-200
+    cvss-metrics: CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:N
+    cwe-id: CWE-668
+    cpe: cpe:2.3:a:avantfax:avantfax:*:*:*:*:*:*:*:*
+  metadata:
+    max-request: 1
+    product: avantfax
+    shodan-query: http.title:"AvantFAX - Login"
+    vendor: avantfax
+  tags: panel,avantfax,login
 
-requests:
+http:
   - method: GET
     path:
       - "{{BaseURL}}"
@@ -38,5 +40,4 @@ requests:
         group: 1
         regex:
           - '<p align="center">([0-9.]+)<\/p>'
-
-# Enhanced by mp on 2022/03/20
+# digest: 490a00463044022003d52cbba47ec2c8b4cae0872a5686fcf27efbf8a2a2a39fe2115c6f081eeab802202b7e87d630edfeb150abae4f6aa8e98bd7cb820a1b36e56ab6e9335d650ea28f:922c64590222798bb761d5b6d8e72950

@@ -14,11 +14,10 @@ variables:
   second: "{{rand_int(1000, 9999)}}"
   result: "{{to_number(first)*to_number(second)}}"
 
-http:
-  - pre-condition:
-      - type: dsl
-        dsl:
-          - 'method == "GET"'
+requests:
+  - method: GET
+    path:
+      - "{{BaseURL}}"
 
     skip-variables-check: true
     payloads:
