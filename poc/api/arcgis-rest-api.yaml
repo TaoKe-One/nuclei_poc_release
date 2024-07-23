@@ -5,15 +5,16 @@ info:
   author: Podalirius
   severity: info
   description: ArcGIS documents were discovered.
+  tags: api,arcgis,cms
   reference:
     - https://enterprise.arcgis.com/en/
   classification:
+    cvss-metrics: CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:N
+    cvss-score: 0.0
+    cve-id:
     cwe-id: CWE-200
-  tags: api,arcgis,cms
-  metadata:
-    max-request: 1
 
-http:
+requests:
   - method: GET
     path:
       - '{{BaseURL}}/server/sdk/rest/index.html'

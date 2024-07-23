@@ -3,24 +3,23 @@ id: drupal-install
 info:
   name: Drupal Install
   author: NkxxkN
-  severity: high
-  description: Drupal Install panel exposed.
-  metadata:
-    max-request: 2
-    shodan-query: http.component:"drupal"
-  tags: misconfig,drupal,install,exposure
+  severity: low
+  tags: exposure
 
-http:
-  - method: GET
-    path:
-      - "{{BaseURL}}/install.php?profile=default"
-      - "{{BaseURL}}/core/install.php"
+requests:
+  - payloads:
+      Subdomains: /home/mahmoud/Wordlist/AllSubdomains.txt
+    attack: sniper
+    threads: 100
 
-    stop-at-first-match: true
-    host-redirects: true
-    max-redirects: 1
+    raw:
+      - |
+        GET /install.php?profile=default HTTP/1.1
+        Host: {{Subdomains}}
+        User-Agent: Mozilla/5.0 (Windows NT 10.0; rv:68.0) Gecko/20100101 Firefox/68.0
+        Accept-Encoding: gzip, deflate
+        Accept: */*
     matchers:
       - type: word
         words:
           - "<title>Choose language | Drupal</title>"
-# digest: 490a004630440220115cf9e237a9e0e09034a814da536ec254ae826df2023819714ad7677814606102207ecda93edc69d914ee07bed7be0c76fcae80cd410e6a511552cd3686c8e6e785:922c64590222798bb761d5b6d8e72950
