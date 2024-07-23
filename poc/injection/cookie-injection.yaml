@@ -12,11 +12,10 @@ info:
 variables:
   first: "cookie_injection"
 
-http:
-  - pre-condition:
-      - type: dsl
-        dsl:
-          - 'method == "GET"'
+requests:
+  - method: GET
+    path:
+      - "{{BaseURL}}"
 
     payloads:
       reflection:

@@ -1,8 +1,8 @@
-id: Letter Opener Web Exposed
+id: letter-opener-exposed
 info:
   name: Finds Letter Opener Web Exposed
   author: Clark
-  severity: meduim
+  severity: medium
 requests:
   - method: GET
     path:
