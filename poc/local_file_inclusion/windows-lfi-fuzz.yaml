@@ -6,11 +6,10 @@ info:
   severity: high
   tags: lfi,windows,dast
 
-http:
-  - pre-condition:
-      - type: dsl
-        dsl:
-          - 'method == "GET"'
+requests:
+  - method: GET
+    path:
+      - '{{BaseURL}}'
 
     payloads:
       win_fuzz:
