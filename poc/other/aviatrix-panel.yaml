@@ -1,37 +1,40 @@
 id: aviatrix-panel
 
 info:
-  name: Aviatrix Cloud Controller Panel
+  name: Aviatrix Cloud Controller Panel Login
   author: pikpikcu,philippedelteil,daffainfo
   severity: info
   description: An Aviatrix Cloud Controller login panel was detected.
   reference:
     - https://docs.aviatrix.com/HowTos/controller_config.html
-  classification:
-    cwe-id: CWE-200
-    cpe: cpe:2.3:a:aviatrix:controller:*:*:*:*:*:*:*:*
   metadata:
-    max-request: 1
-    product: controller
     shodan-query: http.title:"Aviatrix Cloud Controller"
-    vendor: aviatrix
+  classification:
+    cvss-metrics: CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:N
+    cvss-score: 0.0
+    cwe-id: CWE-200
   tags: panel,aviatrix
 
-http:
+requests:
   - method: GET
     path:
       - "{{BaseURL}}"
+      - "{{BaseURL}}/assets/img/favicon-32x32.png"
 
-    matchers-condition: and
+    stop-at-first-match: true
+    matchers-condition: or
     matchers:
-      - type: word
-        part: body
-        words:
-          - '<title>Aviatrix'
-          - 'Controller</title>'
+      - type: dsl
+        name: "title"
         condition: and
+        dsl:
+          - 'contains(body, "<title>Aviatrix")'
+          - 'contains(body, "Controller</title>")'
+          - 'status_code == 200'
 
-      - type: status
-        status:
-          - 200
-# digest: 490a0046304402207fe85a753a31b3a6089a43a85527b34f42000af5a8e49713e19f0e12ccce963d0220569f10add1384df4bd2795ebaa3001b2ded432e76b449e85f3a2a7cb1ae269ab:922c64590222798bb761d5b6d8e72950
+      - type: dsl
+        name: "favicon"
+        dsl:
+          - "status_code==200 && (\"7c1c26856345cd7edbf250ead0dc9332\" == md5(body))"
+
+# Enhanced by mp on 2022/03/23
