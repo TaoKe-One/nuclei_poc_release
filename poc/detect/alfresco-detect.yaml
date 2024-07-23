@@ -3,18 +3,20 @@ id: alfresco-detect
 info:
   name: Alfresco CMS Detection
   author: pathtaga
-  description: Alfresco CMS was discovered.
   severity: info
-  tags: alfresco,tech,panel
+  description: Alfresco CMS was discovered.
   reference:
     - https://www.alfresco.com/
   classification:
-    cvss-metrics: CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:N
-    cvss-score: 0.0
-    cve-id:
     cwe-id: CWE-200
+    cpe: cpe:2.3:a:alfresco:alfresco:*:*:*:*:android:*:*:*
+  metadata:
+    max-request: 1
+    product: alfresco
+    vendor: alfresco
+  tags: alfresco,tech,panel
 
-requests:
+http:
   - method: GET
     path:
       - "{{BaseURL}}/alfresco/api/-default-/public/cmis/versions/1.1/atom"
@@ -39,5 +41,4 @@ requests:
           - 'Enterprise v.*([0-9]\.[0-9]+\.[0-9]+)'
           - 'Community v.*([0-9]\.[0-9]+\.[0-9]+)'
           - 'Community Early Access v.*([0-9]\.[0-9]+\.[0-9]+)'
-
-# Enhanced by mp on 2022/03/16
+# digest: 4b0a004830460221008d893c552b5e2bdde2631fec4d5ef9896421e1175b5b11b2eae4652101a550a0022100d2ae2342988557ee19fe02dfc809028429ddb4ff01d94fadf67709aa6cabcef2:922c64590222798bb761d5b6d8e72950
