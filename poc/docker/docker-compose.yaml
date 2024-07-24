@@ -1,8 +1,30 @@
 version: '3'
-
 services:
-  app:
-    build: .
-    image: cve-2022-22965
+  web_server:
+    image: ghcr.io/cavonstavant/web_server:latest
     ports:
-      - 8080:8080
+      - 80:8080
+    depends_on:
+      - postgresql
+      - redis
+
+  tcp_server:
+    image: ghcr.io/cavonstavant/tcp_server:latest
+    ports:
+      - 9999:9999
+
+  postgresql:
+    image: postgres:latest
+    environment:
+      - POSTGRES_USER=test_user
+      - POSTGRES_PASSWORD=test_password
+      - POSTGRES_DB=test_database
+    ports:
+      - 5432:5432
+
+  redis:
+    image: redis:latest
+    command: >
+      redis-server --requirepass test_password
+    ports:
+      - 6379:6379
