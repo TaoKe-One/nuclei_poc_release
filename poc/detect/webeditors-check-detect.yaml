@@ -7,11 +7,15 @@ info:
   description: Multiple web editor checks were detected.
   classification:
     cvss-metrics: CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:N
-    cvss-score: 0.0
     cwe-id: CWE-200
-  tags: panel,webeditors
+    cpe: cpe:2.3:a:ckeditor:ckeditor:*:*:*:*:drupal:*:*:*
+  metadata:
+    max-request: 17
+    product: ckeditor
+    vendor: ckeditor
+  tags: panel,webeditors,ckeditor
 
-requests:
+http:
   - method: GET
     path:
       - "{{BaseURL}}/fckeditor/_samples/default.html"
@@ -45,5 +49,4 @@ requests:
           - "Replace Textareas by Class Name"
           - "CKEditor - The text editor for the Internet"
         condition: or
-
-# Enhanced by md on 2023/01/25
+# digest: 4b0a00483046022100d518099cbe2ba5227ab82dbc2ca9db4380f09879c265d94972df0d5b2e4d07c30221009aa571b18024d4fd374ec6a7855b46694a75b0b69768f5af4898ecfcb7bbf45a:922c64590222798bb761d5b6d8e72950
