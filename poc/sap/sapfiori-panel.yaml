@@ -1,21 +1,13 @@
 id: sapfiori-panel
 
 info:
-  name: SAP Fiori Login Panel - Detect
+  name: SAP Fiori Instance Detection Template
   author: righettod
   severity: info
-  description: SAP Fiori login panel was detected.
-  classification:
-    cvss-metrics: CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:N
-    cwe-id: CWE-200
-    cpe: cpe:2.3:a:sap:fiori:*:*:*:*:erp_hcm:*:*:*
-  metadata:
-    max-request: 2
-    product: fiori
-    vendor: sap
+  description: Try to detect the presence of a SAP Fiori instance via the login page
   tags: panel,sap,fiori
 
-http:
+requests:
   - method: GET
     path:
       - "{{BaseURL}}/fiori"
@@ -36,4 +28,3 @@ http:
           - "/irj/portal/fiori"
         part: body
         condition: and
-# digest: 490a0046304402203d41556c3f1228a4469aa73d7fa49ef10ace8c55d29c0d2d02f61e486550c97e02202a6a47e478602c9ae90189b470b039711bef7a58321ab72673a2c3cb2f8bde9d:922c64590222798bb761d5b6d8e72950
