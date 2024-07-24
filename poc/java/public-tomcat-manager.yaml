@@ -1,20 +1,18 @@
 id: public-tomcat-manager
 
 info:
-  name: Apache Tomcat Manager Login Panel - Detect
-  author: Ahmed Sherif,geeknik,sinKettu
+  name: Apache Tomcat Manager Disclosure
+  author: Ahmed Sherif,geeknik
   severity: info
-  description: Apache Tomcat Manager login panel was detected.
+  description: An Apache Tomcat Manager panel was discovered.
+  tags: panel,tomcat,apache
   classification:
     cvss-metrics: CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:N
     cvss-score: 0.0
+    cve-id:
     cwe-id: CWE-200
-  metadata:
-    max-request: 2
-    shodan-query: title:"Apache Tomcat"
-  tags: panel,tomcat,apache
 
-http:
+requests:
   - method: GET
     path:
       - '{{BaseURL}}/manager/html'
@@ -23,11 +21,8 @@ http:
     matchers-condition: and
     matchers:
       - type: word
-        part: response
         words:
           - "Apache Tomcat"
-          - "Tomcat Manager"
-        condition: or
 
       - type: status
         status:
@@ -35,4 +30,4 @@ http:
           - 200
         condition: or
 
-# Enhanced by md on 2022/11/28
+# Enhanced by mp on 2022/03/16

@@ -14,10 +14,11 @@ info:
 variables:
   marker: "{{interactsh-url}}"
 
-requests:
-  - method: GET
-    path:
-      - "{{BaseURL}}"
+http:
+  - pre-condition:
+      - type: dsl
+        dsl:
+          - 'method == "GET"'
 
     stop-at-first-match: true
     payloads:
