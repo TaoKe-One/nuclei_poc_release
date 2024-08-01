@@ -2,37 +2,60 @@ name: 🔨 Build Test
 
 on:
   pull_request:
+    paths:
+      - '**.go'
+      - '**.mod'
   workflow_dispatch:
 
 jobs:
   build:
     name: Test Builds
-    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest, macOS-latest]
+        go-version: [1.20.x]
+        os: [ubuntu-latest, windows-latest, macOS-13]
+
+    runs-on: ${{ matrix.os }}
     steps:
       - name: Set up Go
         uses: actions/setup-go@v4
         with:
-          go-version: 1.21
+          go-version: ${{ matrix.go-version }}
 
       - name: Check out code
         uses: actions/checkout@v3
 
+      - name: Go Mod hygine
+        run: |
+          go clean -modcache
+          go mod tidy
+        working-directory: v2/
+
       - name: Build
         run: go build .
-        working-directory: .
+        working-directory: v2/cmd/nuclei/
 
       - name: Test
-        run: go test ./...
-        working-directory: .
-
-      - name: install nuclei and nuclei templates
-        run: go run -v github.com/projectdiscovery/nuclei/v2/cmd/nuclei@latest
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-        
+        run: go test ./...
+        working-directory: v2/
+
+      - name: Integration Tests
+        timeout-minutes: 50
+        env:
+          GH_ACTION: true
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+        run: |
+          chmod +x run.sh
+          bash run.sh ${{ matrix.os }}
+        working-directory: integration_tests/
+
       - name: Race Condition Tests
-        run: go run -race .
-        working-directory: .
+        if: ${{ matrix.os != 'windows-latest' }} # known issue: https://github.com/golang/go/issues/46099
+        run: go run -race . -l ../functional-test/targets.txt -id tech-detect,tls-version
+        working-directory: v2/cmd/nuclei/
+
+      - name: Example Code Tests
+        run: go build .
+        working-directory: v2/examples/
