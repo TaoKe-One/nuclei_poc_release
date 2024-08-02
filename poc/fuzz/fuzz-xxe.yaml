@@ -12,10 +12,9 @@ variables:
   rletter: "{{rand_base(6,'abc')}}"
 
 http:
-  - pre-condition:
-      - type: dsl
-        dsl:
-          - 'method == "GET"'
+  - method: GET
+    path:
+      - "{{BaseURL}}"
 
     payloads:
       xxe:
