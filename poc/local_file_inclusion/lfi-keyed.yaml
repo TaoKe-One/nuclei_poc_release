@@ -19,10 +19,9 @@ variables:
   fuzz_bypass_waf_regx: "./.././.././.././.././.././.././.././.././.././.././.././.././.././.././../"
 
 http:
-  - pre-condition:
-      - type: dsl
-        dsl:
-          - 'method == "GET"'
+  - method: GET
+    path:
+      - "{{BaseURL}}"
 
     payloads:
       pathtraversal:
