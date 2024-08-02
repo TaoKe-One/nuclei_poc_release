@@ -1,24 +1,29 @@
 id: server-status-localhost
 
 info:
-  name: Server Status Disclosure
-  author: bauthard
-  severity: low
+  name: Apache Server Status Check
+  author: 0xr2r (https://twitter.com/x0xr2r)
+  severity: medium
+  description: Apache Server Status page is exposed, which may contain information about pages visited by the users, their IPs or sensitive information such as session tokens.
+
+  tags:
+    - server-info
+    - server-status
+    - balancer-manager
+    - apache
+    - information
 
 requests:
   - method: GET
-    # Example of sending some headers to the servers
-    headers:
-      X-Client-IP: "127.0.0.1"
-      X-Remote-IP: "127.0.0.1"
-      X-Remote-Addr: "127.0.0.1"
-      X-Forwarded-For: "127.0.0.1"
-      X-Originating-IP: "127.0.0.1"
     path:
+      - "{{BaseURL}}/server-info"
       - "{{BaseURL}}/server-status"
+      - "{{BaseURL}}/balancer-manager"
+
     matchers:
       - type: word
+        part: response
         words:
-          - "Apache Server Status"
-          - "Server Version"
-        condition: and
+          - "Server Version:"
+          
+          
