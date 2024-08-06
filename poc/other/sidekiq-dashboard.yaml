@@ -4,7 +4,6 @@ info:
   name: sidekiq-dashboard
   author: dhiyaneshDK
   severity: medium
-  tags: unauth
 
 requests:
   - method: GET
