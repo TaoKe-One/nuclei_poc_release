@@ -2,9 +2,8 @@ id: solr-exposure
 
 info:
   name: Apache Solr Exposure
-  author: pdteam
+  author: pd-team
   severity: medium
-  tags: panel
 
 requests:
   - method: GET
