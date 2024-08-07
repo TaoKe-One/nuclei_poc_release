@@ -2,9 +2,8 @@ id: ansible-tower-exposure
 
 info:
   name: Ansible Tower Exposure
-  author: pdteam
+  author: pd-team
   severity: low
-  tags: panel
 
 requests:
   - method: GET

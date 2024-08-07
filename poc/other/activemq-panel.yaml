@@ -2,9 +2,8 @@ id: activemq-panel
 
 info:
   name: Apache ActiveMQ Exposure
-  author: pdteam
+  author: pd-team
   severity: info
-  tags: panel
 
 requests:
   - method: GET
