@@ -5,6 +5,8 @@ info:
   author: lu4nx
   severity: high
   tags: network,clickhouse,unauth
+  metadata:
+  mongoid: 0000
 
 network:
   - inputs:
