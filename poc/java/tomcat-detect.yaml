@@ -8,6 +8,7 @@ info:
   metadata:
     shodan-query: title:"Apache Tomcat"
   tags: tech,tomcat,apache
+  mongoid: 0000
 
 requests:
   - method: GET
