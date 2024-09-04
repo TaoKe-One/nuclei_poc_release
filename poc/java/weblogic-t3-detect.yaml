@@ -6,6 +6,8 @@ info:
   severity: info
   description: Check T3 protocol status.
   tags: network,weblogic
+  metadata:
+  mongoid: 0000
 
 network:
   - inputs:
