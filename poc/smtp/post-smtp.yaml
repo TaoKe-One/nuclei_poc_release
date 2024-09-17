@@ -1,7 +1,7 @@
 id: wordpress-post-smtp
 
 info:
-  name: Post SMTP Mailer/Email Log – Best Mail SMTP For WP Detection
+  name: POST SMTP Mailer – Email log, Delivery Failure Notifications and Best Mail SMTP for WordPress Detection
   author: ricardomaia
   severity: info
   reference:
@@ -13,7 +13,6 @@ info:
 
 requests:
   - method: GET
-
     path:
       - "{{BaseURL}}/wp-content/plugins/post-smtp/readme.txt"
 
