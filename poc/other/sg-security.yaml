@@ -1,7 +1,7 @@
 id: wordpress-sg-security
 
 info:
-  name: All-inclusive Security Solution by SiteGround Detection
+  name: SiteGround Security Detection
   author: ricardomaia
   severity: info
   reference:
@@ -13,6 +13,7 @@ info:
 
 requests:
   - method: GET
+
     path:
       - "{{BaseURL}}/wp-content/plugins/sg-security/readme.txt"
 
