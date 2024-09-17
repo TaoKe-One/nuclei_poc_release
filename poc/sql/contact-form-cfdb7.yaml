@@ -13,7 +13,6 @@ info:
 
 requests:
   - method: GET
-
     path:
       - "{{BaseURL}}/wp-content/plugins/contact-form-cfdb7/readme.txt"
 
