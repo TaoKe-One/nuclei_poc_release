@@ -13,6 +13,7 @@ info:
 
 requests:
   - method: GET
+
     path:
       - "{{BaseURL}}/wp-content/plugins/stops-core-theme-and-plugin-updates/readme.txt"
 
