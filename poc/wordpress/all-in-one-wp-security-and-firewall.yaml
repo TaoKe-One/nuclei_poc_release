@@ -13,6 +13,7 @@ info:
 
 requests:
   - method: GET
+
     path:
       - "{{BaseURL}}/wp-content/plugins/all-in-one-wp-security-and-firewall/readme.txt"
 
