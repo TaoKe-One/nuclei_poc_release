@@ -1,7 +1,7 @@
 id: wordpress-redux-framework
 
 info:
-  name: Redux Framework Detection
+  name: Gutenberg Template and Pattern Library & Redux Framework Detection
   author: ricardomaia
   severity: info
   reference:
@@ -13,6 +13,7 @@ info:
 
 requests:
   - method: GET
+
     path:
       - "{{BaseURL}}/wp-content/plugins/redux-framework/readme.txt"
 

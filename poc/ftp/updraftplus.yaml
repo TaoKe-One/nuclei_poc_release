@@ -1,7 +1,7 @@
 id: wordpress-updraftplus
 
 info:
-  name: UpdraftPlus WordPress Backup & Migration Plugin Detection
+  name: UpdraftPlus WordPress Backup Plugin Detection
   author: ricardomaia
   severity: info
   reference:
@@ -13,6 +13,7 @@ info:
 
 requests:
   - method: GET
+
     path:
       - "{{BaseURL}}/wp-content/plugins/updraftplus/readme.txt"
 
