@@ -1,6 +1,2 @@
-coverage:
-  status:
-    project:
-      default:
-        threshold: 15%
-    patch: off
+codecov:
+  token: 6bf9c7eb-69ff-4b74-8464-e2fb452d0f04
