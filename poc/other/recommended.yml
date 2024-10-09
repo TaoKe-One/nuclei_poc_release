@@ -5,25 +5,24 @@
 # Here is an example of how to use a config profile:
 # nuclei -config config/recommended.yml -list target_list_to_scan.txt
 
-severity:
-  - critical
-  - high
-  - medium
-  - low
-  - unknown
-
-type:
-  - http
-  - tcp
-  - javascript
+exclude-severity:
+  - info
 
 exclude-tags:
   - tech
   - dos
-  - brute-force
+  - fuzz
   - creds-stuffing
   - token-spray
-  - osint
+
+exclude-protocols:
+  - ssl
+  - dns
+  - file
+  - code
+  - whois
+  - headless
+  - workflow
 
 exclude-id:
   - CVE-2021-45967
@@ -87,4 +86,3 @@ exclude-id:
   - open-proxy-internal
   - open-proxy-localhost
   - open-proxy-portscan
-
