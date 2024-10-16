@@ -1,10 +1,6 @@
 name: ❄️ YAML Lint
 
-on:
-  pull_request:
-    paths:
-      - '**.yaml'
-  workflow_dispatch:
+on: [push, pull_request]
 
 jobs:
   build:
