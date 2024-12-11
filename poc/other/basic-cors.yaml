@@ -3,8 +3,7 @@ id: basic-cors-misconfig
 info:
   name: Basic CORS misconfiguration
   author: nadino
-  severity: info
-  tags: cors
+  severity: low
 
 requests:
   - method: GET

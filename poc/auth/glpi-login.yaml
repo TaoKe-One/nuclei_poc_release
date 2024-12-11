@@ -4,11 +4,10 @@ info:
   name: GLPI - Аутентификация
   author: dhiyaneshDk
   severity: info
-  reference:
-    - https://www.exploit-db.com/ghdb/7002
+  reference: https://www.exploit-db.com/ghdb/7002
   tags: panel,glpi
 
-requests:
+http:
   - method: GET
     path:
       - '{{BaseURL}}'

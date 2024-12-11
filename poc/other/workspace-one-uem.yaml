@@ -1,26 +1,32 @@
 id: workspace-one-uem
 
 info:
-  name: Vmware Workspace ONE UEM AirWatch Login Panel
-  author: gevakun,hanlaomo
+  name: Workspace ONE UEM AirWatch Login Page
+  author: gevakun
   severity: info
-  reference:
-    - https://twitter.com/Jhaddix/status/1295861505963909120
-  metadata:
-    verified: true
-    shodan-query: http.html:"Airwatch"
-  tags: panel,workspaceone,vmware
+  reference: https://twitter.com/Jhaddix/status/1295861505963909120
+  tags: panel
 
 requests:
-  - method: GET
-    path:
-      - "{{BaseURL}}/AirWatch/Login"
+  - payloads:
+      Subdomains: /home/mahmoud/Wordlist/AllSubdomains.txt
+    attack: sniper
+    threads: 100
 
+    raw:
+      - |
+        GET /AirWatch/Login HTTP/1.1
+        Host: {{Subdomains}}
+        User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/537.36 (KHTML, like Gecko)
     matchers:
       - type: word
-        part: body
         words:
           - "About VMware AirWatch"
-          - 'content="AirWatch'
-          - "/AirWatch/Images"
-        condition: or
+        part: body
+      - type: word
+        words:
+          - "Workspace"
+          - "Login"
+          - "AirWatch"
+        condition: and
+        part: body

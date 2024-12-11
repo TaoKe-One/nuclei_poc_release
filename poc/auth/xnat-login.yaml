@@ -1,13 +1,10 @@
 id: xnat-login
 
 info:
-  name: XNAT Login
+  name: XNAT Login Page
   author: 0x_Akoko
   severity: info
-  metadata:
-    verified: true
-    shodan-query: title:"xnat"
-  tags: xnat,panel
+  tags: xnat,login
 
 requests:
   - method: GET
@@ -19,12 +16,6 @@ requests:
       - type: word
         words:
           - '<title>XNAT</title>'
-
-      - type: word
-        part: header
-        words:
-          - "text/html"
-
       - type: status
         status:
           - 200
