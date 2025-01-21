@@ -1,7 +1,7 @@
 id: wordpress-sg-security
 
 info:
-  name: Security Optimizer – The All-In-One Protection Plugin Detection
+  name: Security Optimizer – The All-In-One WordPress Protection Plugin Detection
   author: ricardomaia
   severity: info
   reference:
@@ -11,8 +11,9 @@ info:
     wpscan: https://wpscan.com/plugin/sg-security
   tags: tech,wordpress,wp-plugin,top-100,top-200
 
-http:
+requests:
   - method: GET
+
     path:
       - "{{BaseURL}}/wp-content/plugins/sg-security/readme.txt"
 
