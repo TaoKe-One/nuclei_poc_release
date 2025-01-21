@@ -1,7 +1,7 @@
 id: wordpress-meta-box
 
 info:
-  name: Meta Box Detection
+  name: Meta Box – WordPress Custom Fields Framework Detection
   author: ricardomaia
   severity: info
   reference:
@@ -13,6 +13,7 @@ info:
 
 http:
   - method: GET
+
     path:
       - "{{BaseURL}}/wp-content/plugins/meta-box/readme.txt"
 
