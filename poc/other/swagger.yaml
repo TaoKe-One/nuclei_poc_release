@@ -1,15 +1,21 @@
-swagger: '2.0'
+id: swagger
 info:
-  title: Example yaml.spec
-  description: |
-    <math><mtext><option><FAKEFAKE><option></option><mglyph><svg><mtext><textarea><a title="</textarea><img src='#' onerror='alert(document.domain)'>">
-paths:
-  /accounts:
-    get:
-      responses:
-        '200':
-          description: No response was specified
-      tags:
-        - accounts
-      operationId: findAccounts
-      summary: Finds all accounts
+  name: swagger
+  author: cn-kali-team
+  tags: detect,tech,swagger
+  severity: info
+  metadata:
+    product: swagger
+    vendor: 00_unknown
+    verified: false
+http:
+- method: GET
+  path:
+  - '{{BaseURL}}/'
+  matchers:
+  - type: word
+    words:
+    - swagger ui
+    - swagger-ui.css
+    - swagger-ui.js
+    case-insensitive: true
