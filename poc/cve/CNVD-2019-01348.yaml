@@ -9,11 +9,16 @@ info:
   tags: xiuno,cnvd
 
 requests:
-  - method: GET
-    path:
-      - "{{BaseURL}}/install/"
-    headers:
-      Accept-Encoding: deflate
+  - payloads:
+      Subdomains: /home/mahmoud/Wordlist/AllSubdomains.txt
+    attack: sniper
+    threads: 100
+
+    raw:
+      - |
+        GET /install/ HTTP/1.1
+        Host: {{Subdomains}}
+        Accept-Encoding: deflate
     matchers-condition: and
     matchers:
       - type: status
