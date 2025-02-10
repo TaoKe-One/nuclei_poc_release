@@ -5,9 +5,11 @@ info:
   author: zzeitlin
   severity: info
   tags: token-spray,google,search,places,text
+  metadata:
+    max-request: 1
 
 self-contained: true
-requests:
+http:
   - method: GET
     path:
       - "https://maps.googleapis.com/maps/api/place/textsearch/json?query=restaurants+in+Sydney&key={{token}}"
