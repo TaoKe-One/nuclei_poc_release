@@ -10,11 +10,12 @@ info:
   classification:
     cwe-id: CWE-200
   metadata:
+    max-request: 1
     shodan-query: html:"amcrest"
-    google-dork: intext:"amcrest" "LDAP User"
-  tags: panel,camera,amcrest
+    google-query: intext:"amcrest" "LDAP User"
+  tags: panel,camera,amcrest,edb
 
-requests:
+http:
   - method: GET
     path:
       - '{{BaseURL}}'
@@ -30,5 +31,3 @@ requests:
       - type: status
         status:
           - 200
-
-# Enhanced by mp on 2022/03/16
