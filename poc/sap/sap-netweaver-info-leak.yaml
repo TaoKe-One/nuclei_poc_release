@@ -8,12 +8,9 @@ info:
   reference:
     - https://www.acunetix.com/vulnerabilities/web/sap-icf-sap-public-info-sensitive-information-disclosure/
     - https://github.com/Jean-Francois-C/SAP-Security-Audit
-  metadata:
-    max-request: 1
-    shodan-query: http.favicon.hash:-266008933
-  tags: sap,misconfig
+  tags: sap
 
-http:
+requests:
   - method: GET
     path:
       - "{{BaseURL}}/sap/public/info"

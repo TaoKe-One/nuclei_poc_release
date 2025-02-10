@@ -8,20 +8,14 @@ info:
     - https://github.com/EdOverflow/can-i-take-over-xyz/issues/237
     - https://help.flexbe.com/domains/
   tags: takeover,flexbe
-  metadata:
-    max-request: 1
 
-http:
+requests:
   - method: GET
     path:
       - "{{BaseURL}}"
 
     matchers-condition: and
     matchers:
-      - type: dsl
-        dsl:
-          - Host != ip
-
       - type: word
         condition: and
         words:
