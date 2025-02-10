@@ -1,59 +1,139 @@
-id: backup
-
+id: backup-files
 info:
-  name: >
-    JetBackup – WP Backup, Migrate & Restore <= 1.4.1 - Missing Authorization to Unauthorized Backup Location Change
-  author: topscoder
-  severity: high
-  description: >
-    
-  reference:
-    - https://github.com/topscoder/nuclei-wordfence-cve
-    - https://www.wordfence.com/threat-intel/vulnerabilities/id/59532447-1d74-4d34-85f5-d89b65a001d8?source=api-scan
-  classification:
-    cvss-metrics: 
-    cvss-score: 
-    cve-id: 
-  metadata:
-    fofa-query: "wp-content/plugins/backup/"
-    google-query: inurl:"/wp-content/plugins/backup/"
-    shodan-query: 'vuln:'
-  tags: cve,wordpress,wp-plugin,backup,high
+  name: Backup Files Finder (information disclosure)
+  author: Vabro
+  severity: High
+  description: |
+    This template checks for common backup file extensions that may have been left exposed on a target.
 
-http:
-  - method: GET
-    redirects: true
-    max-redirects: 3
+requests:
+  - name: backup-files
     path:
-      - "{{BaseURL}}/wp-content/plugins/backup/readme.txt"
-
-    extractors:
-      - type: regex
-        name: version
-        part: body
-        group: 1
-        internal: true
-        regex:
-          - "(?mi)Stable tag: ([0-9.]+)"
-
-      - type: regex
-        name: version
-        part: body
-        group: 1
-        regex:
-          - "(?mi)Stable tag: ([0-9.]+)"
-
-    matchers-condition: and
+      - "/backup"
+      - "/backups"
+      - "/root"
+      - "/www"
+      - "/public_html"
+      - "/ht_docs"
+      - "/files"
+      - "/images"
+      - "/assets"
+      - "/media"
+      - "/documents"
+      - "/resources"
+    method: GET
+    matchers-condition: or
     matchers:
-      - type: status
-        status:
-          - 200
-
       - type: word
         words:
-          - "backup"
-        part: body
-
-      - type: dsl
-        dsl:
-          - compare_versions(version, '<= 1.4.0')
+          - ".bak"
+          - ".old"
+          - ".zip"
+          - ".tar"
+          - ".tar.gz"
+          - ".tar.bz2"
+          - ".tar.xz"
+          - ".7z"
+          - ".rar"
+          - ".gz"
+          - ".bz2"
+          - ".xz"
+          - ".sql"
+          - ".db"
+          - ".bak"
+          - ".swp"
+          - ".swp"
+          - ".save"
+          - ".save"
+          - ".sav"
+          - ".sav"
+          - ".copy"
+          - ".copy"
+          - ".backup"
+          - ".backup"
+          - ".orig"
+          - ".orig"
+          - ".old"
+          - ".old"
+          - ".tmp"
+          - ".tmp"
+          - ".temp"
+          - ".temp"
+          - ".test"
+          - ".test"
+          - ".demo"
+          - ".demo"
+          - ".dev"
+          - ".dev"
+          - ".sample"
+          - ".sample"
+          - ".example"
+          - ".example"
+          - ".backup"
+          - ".backup"
+          - ".config"
+          - ".config"
+          - ".conf"
+          - ".conf"
+          - ".log"
+          - ".log"
+          - ".txt"
+          - ".txt"
+          - ".doc"
+          - ".doc"
+          - ".docx"
+          - ".xls"
+          - ".xlsx"
+          - ".ppt"
+          - ".pptx"
+          - ".pdf"
+          - ".csv"
+          - ".bak"
+          - ".bak"
+          - ".swp"
+          - ".swp"
+          - ".save"
+          - ".save"
+          - ".sav"
+          - ".sav"
+          - ".copy"
+          - ".copy"
+          - ".backup"
+          - ".backup"
+          - ".orig"
+          - ".orig"
+          - ".old"
+          - ".old"
+          - ".tmp"
+          - ".tmp"
+          - ".temp"
+          - ".temp"
+          - ".test"
+          - ".test"
+          - ".demo"
+          - ".demo"
+          - ".dev"
+          - ".dev"
+          - ".sample"
+          - ".sample"
+          - ".example"
+          - ".example"
+          - ".backup"
+          - ".backup"
+          - ".config"
+          - ".config"
+          - ".conf"
+          - ".conf"
+          - ".log"
+          - ".log"
+          - ".txt"
+          - ".txt"
+          - ".doc"
+          - ".doc"
+          - ".docx"
+          - ".xls"
+          - ".xlsx"
+          - ".ppt"
+          - ".pptx"
+          - ".pdf"
+          - ".csv"

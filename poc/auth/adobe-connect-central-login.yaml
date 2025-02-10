@@ -10,10 +10,8 @@ info:
   classification:
     cwe-id: CWE-200
   tags: adobe,panel,connect-central
-  metadata:
-    max-request: 1
 
-http:
+requests:
   - method: GET
     path:
       - "{{BaseURL}}/system/login"
@@ -28,3 +26,5 @@ http:
       - type: status
         status:
           - 200
+
+# Enhanced by mp on 2022/03/20
