@@ -4,9 +4,12 @@ info:
   name: Tomcat exposed docs
   author: Podalirius
   severity: info
-  tags: version,tomcat,docs
+  metadata:
+    max-request: 1
+    shodan-query: title:"Apache Tomcat"
+  tags: version,tomcat,docs,panel
 
-requests:
+http:
   - method: GET
     path:
       - '{{BaseURL}}/docs/'

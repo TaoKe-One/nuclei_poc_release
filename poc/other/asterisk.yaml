@@ -1,14 +1,23 @@
-name: asterisk
-priority: 2
-nuclei_tags:
-  - []
-fingerprint:
-  - path: /
-    request_method: get
-    request_headers: {}
-    request_data: ''
-    status_code: 0
-    headers: {}
-    keyword:
-      - asterisk_rawmanpath
-    favicon_hash: []
+id: asterisk
+info:
+  name: Asterisk Call Manager
+  author: nmap,cn-kali-team
+  tags: detect,tech,asterisk,service
+  severity: info
+  metadata:
+    product: asterisk
+    rarity: 0
+    vendor: digium
+    verified: true
+    version: $1
+tcp:
+- name: 'null'
+  inputs:
+  - data: ''
+  host:
+  - '{{Hostname}}'
+  extractors:
+  - name: asterisk
+    type: regex
+    regex:
+    - ^Asterisk Call Manager/([\d.]+)\r\n
