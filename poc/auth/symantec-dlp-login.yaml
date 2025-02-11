@@ -1,14 +1,20 @@
 id: symantec-dlp-login
 
 info:
-  name: Symantec Data Loss Prevention
+  name: Symantec Data Loss Prevention Login Panel - Detect
   author: princechaddha
   severity: info
-  reference:
-    - https://www.shodan.io/search?query=http.title%3A%22Symantec+Data+Loss+Prevention%22
+  description: Symantec Data Loss Prevention login panel was detected.
+  classification:
+    cvss-metrics: CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:N
+    cvss-score: 0.0
+    cwe-id: CWE-200
+  metadata:
+    max-request: 1
+    shodan-query: http.title:"Symantec Data Loss Prevention"
   tags: symantec,panel,login
 
-requests:
+http:
   - method: GET
     path:
       - '{{BaseURL}}/ProtectManager/Logon'
