@@ -4,12 +4,10 @@ info:
   name: Detect websites using Herokuapp endpoints
   author: alifathi-h1
   severity: info
-  description: Detected endpoints might be vulnerable to subdomain takeover or disclose sensitive info
   tags: heroku,tech
-  metadata:
-    max-request: 1
+  description: Detected endpoints might be vulnerable to subdomain takeover or disclose sensitive info
 
-http:
+requests:
   - method: GET
     path:
       - "{{BaseURL}}"

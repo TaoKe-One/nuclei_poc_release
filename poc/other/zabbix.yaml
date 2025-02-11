@@ -1,23 +1,24 @@
-id: zabbix
-info:
-  name: Zabbix Monitoring System
-  author: nmap,cn-kali-team
-  tags: detect,tech,zabbix,service
-  severity: info
-  metadata:
-    product: zabbix
-    rarity: 8
-    vendor: zabbix
-    verified: true
-tcp:
-- name: nessus-tpv10
-  inputs:
-  - data: < NTP/1.0 >\n
-  host:
-  - '{{Hostname}}'
-  port: '1241'
-  extractors:
-  - name: zabbix
-    type: regex
-    regex:
-    - ^NOT OK\n$
+name: zabbix
+priority: 3
+nuclei_tags:
+  - - zabbix
+fingerprint:
+  - path: /
+    request_method: get
+    request_headers: {}
+    request_data: ''
+    status_code: 0
+    headers: {}
+    keyword:
+      - Zabbix SIA
+      - zabbix
+    favicon_hash: []
+  - path: /
+    request_method: get
+    request_headers: {}
+    request_data: ''
+    status_code: 0
+    headers: {}
+    keyword:
+      - images/general/zabbix.ico
+    favicon_hash: []
