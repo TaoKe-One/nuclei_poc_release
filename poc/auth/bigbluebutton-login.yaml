@@ -10,8 +10,10 @@ info:
   classification:
     cwe-id: CWE-200
   tags: panel,bigbluebutton
+  metadata:
+    max-request: 1
 
-requests:
+http:
   - method: GET
     path:
       - '{{BaseURL}}'
@@ -30,5 +32,3 @@ requests:
         group: 1
         regex:
           - 'Greenlight<\/a>\. (.*)'
-
-# Enhanced by mp on 2022/03/23

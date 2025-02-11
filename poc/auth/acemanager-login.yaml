@@ -8,10 +8,11 @@ info:
   classification:
     cwe-id: CWE-200
   metadata:
-    fofa-dork: app="ACEmanager"
+    max-request: 1
+    fofa-query: app="ACEmanager"
   tags: panel,login,tech,acemanager
 
-requests:
+http:
   - method: GET
     path:
       - "{{BaseURL}}"
@@ -33,5 +34,3 @@ requests:
         part: body
         regex:
           - 'ALEOS Version ([0-9.]+) \| Copyright &co'
-
-# Enhanced by mp on 2022/03/14

@@ -5,10 +5,11 @@ info:
   author: dhiyaneshDK
   severity: info
   metadata:
+    max-request: 1
     shodan-query: title:"Microsoft Azure Web App - Error 404"
-  tags: error,azure,microsoft
+  tags: error,azure,microsoft,misc
 
-requests:
+http:
   - method: GET
     path:
       - "{{BaseURL}}"
