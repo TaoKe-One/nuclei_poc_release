@@ -6,9 +6,12 @@ info:
   severity: info
   reference:
     - https://github.com/dievus/geeMailUserFinder
+  tags: fuzz,gmail
+  metadata:
+    max-request: 1
 
 self-contained: true
-requests:
+http:
   - method: HEAD
     path:
       - "https://mail.google.com/mail/gxlu?email={{email}}"
