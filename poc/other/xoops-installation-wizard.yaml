@@ -1,12 +1,15 @@
 id: xoops-installation-wizard
 
 info:
-  name: XOOPS Installation wizard
+  name: XOOPS Installation Wizard Panel - Detect
   author: princechaddha
   severity: low
+  description: XOOPS Installation Wizard panel was detected.
   tags: panel,xoops
+  metadata:
+    max-request: 1
 
-requests:
+http:
   - method: GET
     path:
       - "{{BaseURL}}/install/page_start.php"
