@@ -1,21 +1,76 @@
-# API URL接口
-#    protected String apiUrl;
-apiUrl=https://fofa.info/api/v1/search/all
+on:
+  push:
+    branches: master
+
+jobs:
+  install:
+    name: Install
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+      - uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+      - name: Install npm
+        if: steps.npm-cache.outputs.cache-hit != 'true'
+        run: npm install
   
-  # 经过base64编码后的查询语法，即输入的查询内容，这是输入搜索关键字即可，无需编码
-  # Example: 
-  # 	icon_hash="-247388890"
-  # "BIG-IP&reg;-+Redirect" && country!="CN"
-qbase64=sonar
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+      - uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+      - name: Install npm
+        if: steps.npm-cache.outputs.cache-hit != 'true'
+        run: npm install
+      - name: Run testing
+        run: npm run test
   
-  # 可选字段，默认host,ip,port，暂不支持修改为其他选项及其顺序
-fields=protocol,host,port,ip
-  
-  # 是否翻页，默认为第一页，按照更新时间排序
-page=1
-  
-  # 每页查询数量，默认为100条，最大支持10,000条/页
-size=100
-  
-  # 默认搜索一年内的数据，指定为true即可搜索全部数据
-full=false
+  render_readme:
+    name: Render README
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+      - uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+      - name: Install npm
+        if: steps.npm-cache.outputs.cache-hit != 'true'
+        run: npm install
+      - name: Generate readme
+        run: |
+          USAGE=`npm run usage --silent`
+          cat README.md.tpl | awk -v USAGE="$USAGE" '{ gsub("{{usage}}",USAGE) }1' > README.md
+      - name: Commit results
+        run: |
+          git config --global user.email "action@github.com"
+          git config --global user.name "Github Action"
+          git commit README.md -m 'Re-build README.md' || echo "No changes to commit"
+          git push origin || echo "No changes to commit"
+
+  publish:
+    name: Publish
+    runs-on: ubuntu-latest
+    needs: [test, render_readme]
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+      - uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+      - name: Install npm
+        if: steps.npm-cache.outputs.cache-hit != 'true'
+        run: npm install
+      - uses: JS-DevTools/npm-publish@v1
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
