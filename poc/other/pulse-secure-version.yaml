@@ -4,9 +4,11 @@ info:
   name: Pulse Secure Version
   author: dadevel
   severity: info
-  tags: pulse
+  tags: pulse,panel
+  metadata:
+    max-request: 2
 
-requests:
+http:
   - method: GET
     path:
       - "{{BaseURL}}/dana-na/nc/nc_gina_ver.txt"  # not present in newer release
