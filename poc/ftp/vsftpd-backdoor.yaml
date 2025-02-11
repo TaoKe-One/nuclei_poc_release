@@ -13,10 +13,8 @@ info:
     cwe-id: CWE-78
   remediation: This backdoor was removed on July 3rd, 2011.
   tags: network,vsftpd,ftp,backdoor
-  metadata:
-    max-request: 2
 
-tcp:
+network:
   - inputs:
       - data: "USER anonymous\r\nPASS anonymous\r\n"
 
@@ -28,3 +26,5 @@ tcp:
       - type: word
         words:
           - "vsFTPd 2.3.4"
+
+# Enhanced by mp on 2022/05/23
