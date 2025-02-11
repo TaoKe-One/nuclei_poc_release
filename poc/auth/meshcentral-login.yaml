@@ -1,20 +1,14 @@
 id: meshcentral-login
 
 info:
-  name: MeshCentral Login Panel - Detect
+  name: MeshCentral - Login
   author: dhiyaneshDk
   severity: info
-  description: MeshCentral login panel was detected.
-  classification:
-    cvss-metrics: CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:N
-    cvss-score: 0.0
-    cwe-id: CWE-200
   metadata:
-    max-request: 1
     shodan-query: http.title:"MeshCentral - Login"
   tags: panel,meshcentral
 
-http:
+requests:
   - method: GET
     path:
       - "{{BaseURL}}"
