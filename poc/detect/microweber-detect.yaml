@@ -7,10 +7,11 @@ info:
   reference:
     - https://github.com/microweber/microweber
   metadata:
+    max-request: 1
     shodan-query: http.favicon.hash:780351152
   tags: tech,microweber,oss
 
-requests:
+http:
   - method: GET
     path:
       - "{{BaseURL}}"
