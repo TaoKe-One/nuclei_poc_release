@@ -1,13 +1,20 @@
 id: xvr-login
 
 info:
-  name: XVR LOGIN
+  name: XVR Login Panel - Detect
   author: dhiyaneshDK
   severity: info
-  reference: https://www.shodan.io/search?query=http.title%3A%22XVR+LOGIN%22
+  description: XVR login panel was detected.
+  classification:
+    cvss-metrics: CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:N
+    cvss-score: 0.0
+    cwe-id: CWE-200
+  metadata:
+    max-request: 1
+    shodan-query: http.title:"XVR LOGIN"
   tags: panel,xvr
 
-requests:
+http:
   - method: GET
     path:
       - '{{BaseURL}}/login.rsp'
