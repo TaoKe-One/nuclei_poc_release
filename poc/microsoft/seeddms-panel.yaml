@@ -1,26 +1,20 @@
 id: seeddms-panel
 
 info:
-  name: SeedDMS Login Panel - Detect
+  name: SeedDMS Login Panel
   author: pussycat0x,daffainfo
   severity: info
-  description: SeedDMS login panel was detected.
-  classification:
-    cvss-metrics: CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:N
-    cvss-score: 0.0
-    cwe-id: CWE-200
   metadata:
-    max-request: 2
     shodan-query: http.title:"SeedDMS"
   tags: panel,seeddms,login
 
-http:
+requests:
   - method: GET
     path:
       - "{{BaseURL}}/out/out.Login.php?referuri=%2Fout%2Fout.ViewFolder.php"
       - "{{BaseURL}}/dms/out/out.Login.php?referuri=%2Fout%2Fout.ViewFolder.php"
 
-    host-redirects: true
+    redirects: true
     max-redirects: 2
     stop-at-first-match: true
     matchers-condition: and
