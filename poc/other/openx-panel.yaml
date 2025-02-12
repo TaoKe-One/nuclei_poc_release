@@ -1,22 +1,14 @@
 id: openx-panel
 
 info:
-  name: OpenX Login Panel - Detect
+  name: OpenX Login Panel
   author: pikpikcu
   severity: info
-  description: OpenX login panel was detected. Note that OpenX is now Revive Adserver.
-  classification:
-    cvss-metrics: CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:N
-    cvss-score: 0.0
-    cwe-id: CWE-200
-  reference:
-    - https://www.revive-adserver.com/download/
   metadata:
-    max-request: 2
     shodan-query: http.title:"OpenX"
   tags: panel,openx,login
 
-http:
+requests:
   - method: GET
     path:
       - "{{BaseURL}}/www/admin/index.php"
