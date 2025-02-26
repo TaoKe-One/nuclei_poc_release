@@ -1,10 +1,15 @@
 linters:
-  enable:
-    # basic go linters
-    - gofmt
-    - golint
-    - govet
+  enable-all: true
+  disable:
+    - gochecknoglobals
+    - gomnd
+    # TODO: re-enable these
+    - errcheck
+    - funlen
+    # TODO: maybe re-enable these
+    - godox
+    - wsl
 
-    # sql related linters
-    - rowserrcheck
-    - sqlclosecheck
+linters-settings:
+  govet:
+    check-shadowing: true
