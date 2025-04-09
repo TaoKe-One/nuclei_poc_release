@@ -2,9 +2,6 @@ name: 🙏🏻 Lint Test
 
 on:
   pull_request:
-    paths:
-      - '**.go'
-      - '**.mod'
   workflow_dispatch:
 
 jobs:
@@ -15,14 +12,12 @@ jobs:
       - name: Set up Go
         uses: actions/setup-go@v4
         with:
-          go-version: 1.20.x
-
+          go-version: 1.21
       - name: Checkout code
         uses: actions/checkout@v3
-
       - name: Run golangci-lint
         uses: golangci/golangci-lint-action@v3.4.0
         with:
           version: latest
           args: --timeout 5m
-          working-directory: v2/
+          working-directory: .
