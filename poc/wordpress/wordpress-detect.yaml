@@ -2,18 +2,14 @@ id: wordpress-detect
 
 info:
   name: WordPress Detect
-  author: pdteam,daffainfo,ricardomaia,topscoder,AdamCrosser
+  author: pdteam,daffainfo,ricardomaia
   severity: info
   metadata:
-    max-request: 4
     verified: true
     shodan-query: http.component:"WordPress"
-    vendor: wordpress
-    product: wordpress
-    category: cms
   tags: tech,wordpress,cms,wp
 
-http:
+requests:
   - method: GET
     path:
       - "{{BaseURL}}"
@@ -21,8 +17,6 @@ http:
       - "{{BaseURL}}/feed/"
       - "{{BaseURL}}/?feed=rss2" # alternative if /feed/ is blocked
 
-    redirects: true
-    max-redirects: 2
     stop-at-first-match: true
     matchers-condition: and
     matchers:
