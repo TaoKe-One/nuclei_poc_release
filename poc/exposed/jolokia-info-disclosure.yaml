@@ -31,7 +31,6 @@ requests:
 
     matchers-condition: or
     matchers:
-
       - type: word
         name: memory
         words:
