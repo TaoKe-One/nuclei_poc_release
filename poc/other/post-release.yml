@@ -18,7 +18,6 @@ on:
   push:
     tags:
       - "v*"
-
 env:
   BIN_NAME: observer_ward
 jobs:
@@ -59,7 +58,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        build: [ linux, macos, macos_m1, win-msvc, linux-arm-v7, linux-aarch64 ]
+        build: [ linux, macos, macos_m1,win-msvc, win7-msvc, linux-arm-v7, linux-aarch64 ]
         include:
           - build: linux
             os: ubuntu-latest
@@ -81,6 +80,11 @@ jobs:
             rust: stable
             target: i686-pc-windows-msvc
             file: observer_ward.exe
+          - build: win7-msvc
+            os: windows-latest
+            rust: nightly
+            target: i686-win7-windows-msvc
+            file: observer_ward_win7.exe
           - build: linux-arm-v7
             os: ubuntu-latest
             rust: stable
@@ -106,23 +110,28 @@ jobs:
           sudo apt-get install -y gcc-multilib xz-utils liblz4-tool libc6-dev libssl-dev musl-tools pkg-config patchelf
           sudo apt-get install -y gcc-aarch64-linux-gnu gcc-arm-linux-gnueabihf
           sed -i -e "s/^version = .*/version = \"`date +'%-Y.%-m.%-d'`\"/" observer_ward/Cargo.toml
-          sed -i -e "s/\"observer_ward\"/\"observer_ward v`date +'%-Y.%-m.%-d'`\"/" observer_ward/src/cli.rs
+          sed -i -e "s/\"observer_ward version\"/\"observer_ward v`date +'%-Y.%-m.%-d'`\"/" observer_ward/src/cli.rs
+      - name: Cache Choco
+        if: matrix.os == 'windows-latest'
+        uses: actions/cache@v4
+        with:
+          path: ${{ github.workspace }}\choco-cache
+          key: ${{ runner.os }}-temp-cache
       - name: Install packages (Windows)
         if: matrix.os == 'windows-latest'
         shell: bash
         run: |
-          choco install llvm openssl
+          choco config set cacheLocation "${{ github.workspace }}\choco-cache"
           export CARGO_PKG_VERSION=`date +'%-Y.%-m.%-d'`
           sed -i -e "s/^version = .*/version = \"`date +'%-Y.%-m.%-d'`\"/" observer_ward/Cargo.toml
-          sed -i -e "s/\"observer_ward\"/\"observer_ward v`date +'%-Y.%-m.%-d'`\"/" observer_ward/src/cli.rs
+          sed -i -e "s/\"observer_ward version\"/\"observer_ward v`date +'%-Y.%-m.%-d'`\"/" observer_ward/src/cli.rs
           echo "CARGO_PKG_VERSION=`date +'%Y.%m.%d'`" >>$GITHUB_ENV
-          echo "OPENSSL_DIR=C:\Program Files\OpenSSL-Win64" >>$GITHUB_ENV
           echo "RUSTFLAGS=-C target-feature=+crt-static" >>$GITHUB_ENV
       - name: Install packages (Macos)
         if: matrix.os == 'macos-latest'
         run: |
           sed -i -e "s/^version = .*/version = \"`date +'%-Y.%-m.%-d'`\"/" observer_ward/Cargo.toml
-          sed -i -e "s/\"observer_ward\"/\"observer_ward v`date +'%-Y.%-m.%-d'`\"/" observer_ward/src/cli.rs
+          sed -i -e "s/\"observer_ward version\"/\"observer_ward v`date +'%-Y.%-m.%-d'`\"/" observer_ward/src/cli.rs
       - name: Install Rust
         uses: actions-rs/toolchain@v1
         with:
@@ -130,8 +139,17 @@ jobs:
           profile: minimal
           override: true
           target: ${{ matrix.target }}
-      - name: Build release binary
-        run: cargo build --target ${{ matrix.target }} --verbose --release
+      - name: Build stable release binary
+        if: matrix.rust == 'stable'
+        run: |
+          cargo build --target ${{ matrix.target }} --verbose --release --bin observer_ward
+          cargo build --target ${{ matrix.target }} --verbose --release --features=mcp --bin observer_ward_mcp
+      - name: Build nightly release binary
+        if: matrix.rust == 'nightly'
+        run: |
+          rustup component add rust-src --toolchain nightly-i686-win7-windows-msvc
+          cargo +nightly build --target ${{ matrix.target }} --verbose --release --bin observer_ward
+          cargo +nightly build --target ${{ matrix.target }} --verbose --release --features=mcp --bin observer_ward_mcp
       - name: Build archive
         shell: bash
         run: |
@@ -140,35 +158,47 @@ jobs:
           cp {README.md,LICENSE} "$staging/"
           if [ "${{ matrix.os }}" = "windows-latest" ]; then
             bin_file="target/${{ matrix.target }}/release/${{ env.BIN_NAME }}.exe"
+            mcp_bin_file="target/${{ matrix.target }}/release/${{ env.BIN_NAME }}_mcp.exe"
             cp "$bin_file" "$staging/"
+            cp "$mcp_bin_file" "$staging/"
             cd "$staging"
             7z a "../$staging.zip" .
             echo "ASSET=$staging.zip" >> $GITHUB_ENV
             echo "BIN_FILE=$bin_file" >> $GITHUB_ENV
+            echo "MCP_BIN_FILE=$mcp_bin_file" >> $GITHUB_ENV
           else
             bin_file="target/${{ matrix.target }}/release/${{ env.BIN_NAME }}"
+            mcp_bin_file="target/${{ matrix.target }}/release/${{ env.BIN_NAME }}_mcp"
             cp "$bin_file" "$staging/"
-            tar czf "$staging.tar.gz" -C "$staging" ${{ env.BIN_NAME }} README.md LICENSE
+            cp "$mcp_bin_file" "$staging/"
+            tar czf "$staging.tar.gz" -C "$staging" ${{ env.BIN_NAME }} ${{ env.BIN_NAME }}_mcp README.md LICENSE
             echo "ASSET=$staging.tar.gz" >> $GITHUB_ENV
             echo "BIN_FILE=$bin_file" >> $GITHUB_ENV
+            echo "MCP_BIN_FILE=$mcp_bin_file" >> $GITHUB_ENV
           fi
       - name: Upload release archive
-        uses: actions/upload-release-asset@v1.0.1
+        uses: softprops/action-gh-release@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ needs.create-release.outputs.upload_url }}
-          asset_path: ${{ env.ASSET }}
-          asset_name: ${{ env.ASSET }}
-          asset_content_type: application/octet-stream
+          files: ${{ env.ASSET }}
       - name: Upload binary to release
-        uses: svenstaro/upload-release-action@v1-release
+        uses: softprops/action-gh-release@v2
         with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: ${{ env.BIN_FILE }}
-          asset_name: ${{ matrix.file }}
-          tag: default
-          overwrite: true
+          files: |
+            ${{ env.BIN_FILE }}
+            ${{ env.MCP_BIN_FILE }}
+          tag_name: defaultv4
+      - name: Install Cargo deb (Ubuntu)
+        if: matrix.os == 'ubuntu-latest'
+        run: |
+          cargo install cargo-deb
+          cargo deb --target ${{ matrix.target }} --output target/${{ matrix.target }}/debian/observer-ward_${{ needs.create-release.outputs.release_version }}_${{ matrix.target }}.deb
+      - name: Upload deb to release
+        if: matrix.os == 'ubuntu-latest'
+        uses: softprops/action-gh-release@v2
+        with:
+          files: target/${{ matrix.target }}/debian/observer-ward_${{ needs.create-release.outputs.release_version }}_${{ matrix.target }}.deb
   homebrew:
     runs-on: ubuntu-latest
     needs:
