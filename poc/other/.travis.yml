@@ -1,15 +1,9 @@
 language: go
-go_import_path: github.com/sirupsen/logrus
-git:
-  depth: 1
-env:
-  - GO111MODULE=on
-go: 1.15.x
-os: linux
-install:
-  - ./travis/install.sh
+go:
+  - tip
+before_install:
+  - go get github.com/axw/gocov/gocov
+  - go get github.com/mattn/goveralls
+  - go get golang.org/x/tools/cmd/cover
 script:
-  - cd ci
-  - go run mage.go -v -w ../ crossBuild
-  - go run mage.go -v -w ../ lint
-  - go run mage.go -v -w ../ test
+  - $HOME/gopath/bin/goveralls -service=travis-ci
