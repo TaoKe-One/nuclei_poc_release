@@ -1,56 +1,44 @@
-name: Update README with Templates
+name: "Auto Update README"
 
 on:
   push:
     branches:
-      - dev
-    paths:
-      - '**.yaml'
-  pull_request:
-    branches:
-      - dev
+      - master
+  create:
+    tags:
+      - v*
 
 jobs:
-  update-readme:
+  build:
     runs-on: ubuntu-latest
+    if: github.repository == 'projectdiscovery/nuclei-templates'
     steps:
-      - name: Checkout the repository
-        uses: actions/checkout@v4
-        with:
-          submodules: true  # Ensure submodules are initialized and updated
+      - name: Install tree
+        run: sudo apt-get install tree -y
 
-      - name: Initialize and update submodules (if needed)
-        run: git submodule update --init --recursive
+      - name: Check out code
+        uses: actions/checkout@master
+        with:
+          persist-credentials: false
+          fetch-depth: 0
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v2
         with:
-          python-version: '3.x'
+          python-version: "3.8"
 
-      - name: Run Python script to update README
-        run: python .github/scripts/update-readme.py
-
-      # Set up GPG for commit signing
-      - name: Set up GPG
+      - name: Update README
         run: |
-          echo "${{ secrets.GPG_PRIVATE_KEY }}" | gpg --batch --import
-          git config --global user.name "Signing Bot"
-          git config --global user.email "github-actions@github.com"
-          git config --global commit.gpgSign true
-          git config --global user.signingkey ${{ secrets.GPG_KEY_ID }}
+          python .github/scripts/update-readme.py
 
-      # Commit changes with GPG signing
-      - name: Commit changes if any
+      - name: Commit files
         run: |
-          git add README.md
-          if ! git diff --cached --quiet; then
-            git commit -S -m "Update README table"
-          else
-            echo "No changes to commit"
-          fi
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git commit -m "Auto Update README [$(date)] :robot:" -a
 
-      # Push changes
       - name: Push changes
-        run: |
-          git pull origin dev --rebase
-          git push origin dev
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
