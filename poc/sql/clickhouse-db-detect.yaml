@@ -1,9 +1,9 @@
-id: Clickhouse-DB-Detect
+id: Clickhouse DB - Detect
 
 info:
   name: Clickhouse DB - Detect
   author: notnotnotveg
-  severity: info
+  severity: informative
 
 requests:
   - method: GET
@@ -17,4 +17,4 @@ requests:
       - type: word
         words:
           - "clickhouse"
-        part: body    
+        part: body	
