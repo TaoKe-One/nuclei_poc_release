@@ -1,27 +1,15 @@
-run:
-  deadline: 2m
-
 linters:
-  disable-all: true
-  enable:
-    - misspell
-    - govet
-    - staticcheck
+  enable-all: true
+  disable:
+    - gochecknoglobals
+    - gomnd
+    # TODO: re-enable these
     - errcheck
-    - unparam
-    - ineffassign
-    - nakedret
-    - gocyclo
-    - dupl
-    - goimports
-    - revive
-    - gosec
-    - gosimple
-    - typecheck
-    - unused
+    - funlen
+    # TODO: maybe re-enable these
+    - godox
+    - wsl
 
 linters-settings:
-  gofmt:
-    simplify: true
-  dupl:
-    threshold: 600
+  govet:
+    check-shadowing: true
