@@ -1,0 +1,59 @@
+id: shellscripts
+
+info:
+  name: Public shellscripts
+  author: panch0r3d
+  severity: low
+  description: This template checks exposure of bash scripts.
+  metadata:
+    max-request: 23
+  tags: bash,exposure,files
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/.build.sh"
+      - "{{BaseURL}}/.jenkins.sh"
+      - "{{BaseURL}}/.travis.sh"
+      - "{{BaseURL}}/install.sh"
+      - "{{BaseURL}}/update.sh"
+      - "{{BaseURL}}/config.sh"
+      - "{{BaseURL}}/build.sh"
+      - "{{BaseURL}}/setup.sh"
+      - "{{BaseURL}}/run.sh"
+      - "{{BaseURL}}/backup.sh"
+      - "{{BaseURL}}/compile.sh"
+      - "{{BaseURL}}/env.sh"
+      - "{{BaseURL}}/init.sh"
+      - "{{BaseURL}}/startup.sh"
+      - "{{BaseURL}}/wp-setup.sh"
+      - "{{BaseURL}}/deploy.sh"
+      - "{{BaseURL}}/aws.sh"
+      - "{{BaseURL}}/reminder.sh"
+      - "{{BaseURL}}/mysqlbackup.sh"
+      - "{{BaseURL}}/dev2local.sh"
+      - "{{BaseURL}}/local2dev.sh"
+      - "{{BaseURL}}/local2prod.sh"
+      - "{{BaseURL}}/prod2local.sh"
+
+    matchers-condition: and
+    matchers:
+      - type: regex
+        part: body
+        regex:
+          - ".*?bin.*?sh"
+          - ".*?bin.*?bash"
+        condition: or
+
+      - type: word
+        part: header
+        words:
+          - "application/x-sh"
+          - "text/plain"
+          - "text/x-sh"
+        condition: or
+
+      - type: status
+        status:
+          - 200
+# digest: 4a0a00473045022100beb9152a0e8f1582d5578b0c848ba1ec20b5786a330e8518eef523f07d57fe0402200a8a667b86f6b72ccf0bb3544a943daf78d101eb93eb6877d0629dd52ad4244a:922c64590222798bb761d5b6d8e72950
