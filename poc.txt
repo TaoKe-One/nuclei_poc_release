@@ -372842,6 +372842,7 @@
 ./poc_all/git/znv-digital-campus.yaml
 ./poc_all/google/CVE-2009-5158-google_analyticator-2a0ce4fa-24d7-4c41-a003-999ff9f45a42.yaml
 ./poc_all/google/CVE-2012-4915-google_document_embedder-982817f8-c85c-4e25-a33a-6fbf3ab06808.yaml
+./poc_all/google/CVE-2014-125130-google_mp3_audio_player-51d00335-f577-4db4-9110-024fae0a3916.yaml
 ./poc_all/google/CVE-2014-7138-google_calendar_events-31dcf302-9334-476c-a0e2-d8a31bcbbe5d.yaml
 ./poc_all/google/CVE-2014-7182-wp_google_maps-17d3a2e4-d6f3-4302-91b0-2408ccd8958a.yaml
 ./poc_all/google/CVE-2014-7238-contact_form_integrated_with_google_maps-68b202f7-fff1-4056-9b5b-b42b25189706.yaml
@@ -527447,6 +527448,7 @@
 ./poc_all/wordpress/CVE-2022-35730-sticky_header_oceanwp-4e0d21e6-d8a2-44ab-87f3-9e5a16562020.yaml
 ./poc_all/wordpress/CVE-2022-3574-wpforms-01cfe0da-0ffc-4046-b58a-a31f5d10d1bd.yaml
 ./poc_all/wordpress/CVE-2022-3590-wordpress-112ed4f2-fe91-4d83-a3f7-eaf889870af4.yaml
+./poc_all/wordpress/CVE-2022-3590-wordpress-112ed4f2-fe91-4d83-a3f7-eaf889870af4_1.yaml
 ./poc_all/wordpress/CVE-2022-3605-wp_csv_exporter-442551ba-409d-4b46-bdba-111a8df00a47.yaml
 ./poc_all/wordpress/CVE-2022-36386-wp_all_import-9a5ce873-e90b-4bdc-b428-426818ff9a86.yaml
 ./poc_all/wordpress/CVE-2022-36422-wp_postratings-ba27d52e-e43a-4f03-ad99-632c18279413.yaml
