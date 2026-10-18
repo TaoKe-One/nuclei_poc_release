@@ -196090,6 +196090,7 @@
 ./poc_all/cve/CVE-2023-25995-06723fb832e848f117df6ad30c2c4c9b.yaml
 ./poc_all/cve/CVE-2023-25995-ai_mortgage_calculator-ae201118-bacf-4849-92f5-569cef57ee30.yaml
 ./poc_all/cve/CVE-2023-25995-ai_mortgage_calculator-ae201118-bacf-4849-92f5-569cef57ee30_1.yaml
+./poc_all/cve/CVE-2023-25996-booster_elite_for_woocommerce-171311a2-637d-4ac2-9b0f-6026bd477199.yaml
 ./poc_all/cve/CVE-2023-25997-bcb31af24d1b16925300af4bae579735.yaml
 ./poc_all/cve/CVE-2023-25997-sola_support_tickets-d2ea91f1-5ff1-4ee6-a4d9-30f829ebc24c.yaml
 ./poc_all/cve/CVE-2023-25997-sola_support_tickets-d2ea91f1-5ff1-4ee6-a4d9-30f829ebc24c_1.yaml
@@ -240459,6 +240460,7 @@
 ./poc_all/cve/CVE-2024-10294-ce21_suite-cd6ce97c-fd80-4c43-a4d2-02aa91d11fac_1.yaml
 ./poc_all/cve/CVE-2024-10294.yaml
 ./poc_all/cve/CVE-2024-10294_1.yaml
+./poc_all/cve/CVE-2024-10303-marin-1bb089fd-2c6d-45fd-84e2-8531d31785e2.yaml
 ./poc_all/cve/CVE-2024-10308-e95e71d9b22aad1a339e647728650987.yaml
 ./poc_all/cve/CVE-2024-10308-jeg_elementor_kit-98aed079-672c-43bb-a5eb-faf8ffc04b71.yaml
 ./poc_all/cve/CVE-2024-10308-jeg_elementor_kit-98aed079-672c-43bb-a5eb-faf8ffc04b71_1.yaml
@@ -247209,6 +247211,7 @@
 ./poc_all/cve/CVE-2024-12872-a2bcf9f2b1d9f52606d9801abd9bf79c.yaml
 ./poc_all/cve/CVE-2024-12872-zalomeni-a4eca8f3-0b5d-4449-ba89-37c1b497c4d3.yaml
 ./poc_all/cve/CVE-2024-12872-zalomeni-a4eca8f3-0b5d-4449-ba89-37c1b497c4d3_1.yaml
+./poc_all/cve/CVE-2024-12872-zalomeni-a4eca8f3-0b5d-4449-ba89-37c1b497c4d3_2.yaml
 ./poc_all/cve/CVE-2024-12872.yaml
 ./poc_all/cve/CVE-2024-12873-cf76c4bf34b5ab77e4c3aef0f5f315b4.yaml
 ./poc_all/cve/CVE-2024-12873-custom_field_manager-7cf3e557-5964-4a76-920f-1936d2225437.yaml
@@ -256018,6 +256021,7 @@
 ./poc_all/cve/CVE-2024-23517-2ece6891deb14f0c46734a3912706524.yaml
 ./poc_all/cve/CVE-2024-23517-calendar_booking-71a0aa95-f2a9-4537-a8d1-d78336e36125.yaml
 ./poc_all/cve/CVE-2024-23517-calendar_booking-71a0aa95-f2a9-4537-a8d1-d78336e36125_1.yaml
+./poc_all/cve/CVE-2024-23517-calendar_booking-71a0aa95-f2a9-4537-a8d1-d78336e36125_2.yaml
 ./poc_all/cve/CVE-2024-23517.yaml
 ./poc_all/cve/CVE-2024-23517_1.yaml
 ./poc_all/cve/CVE-2024-23518-ba9333e3710168edf092eda194dc5ea3.yaml
