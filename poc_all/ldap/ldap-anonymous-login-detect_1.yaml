@@ -1,0 +1,61 @@
+id: ldap-anonymous-login-detect
+
+info:
+  name: LDAP Anonymous Login - Detect
+  author: pussycat0x,s0obi,0x_Akoko
+  severity: medium
+  description: |
+    Detects whether an LDAP server allows anonymous bind (login without credentials). Anonymous access can expose sensitive directory information and should be restricted
+    unless explicitly intended. Both plaintext LDAP and implicit-TLS LDAPS ports are covered.
+  reference:
+    - https://ldap.com/ldapv3-wire-protocol-reference-bind/#anonymous
+    - https://docs.projectdiscovery.io/templates/protocols/javascript/modules/ldap.Client#getadgroups
+  metadata:
+    max-request: 1
+    shodan-query: ldap
+    verified: true
+  tags: js,network,ldap,enum,vuln
+
+javascript:
+  - code: |
+      const ldap = require('nuclei/ldap');
+
+      // 636 and 3269 (AD global catalog) are implicit TLS. 389 and 3268 are
+      // plaintext with an optional StartTLS upgrade, which cfg.Upgrade requests.
+      const tlsPorts = ['636', '3269'];
+
+      function tryPort(port) {
+        const scheme = tlsPorts.indexOf(String(port)) !== -1 ? 'ldaps://' : 'ldap://';
+        const cfg = new ldap.Config();
+        // The module ignores Upgrade when the scheme is already ldaps.
+        cfg.Upgrade = true;
+        const client = new ldap.Client(scheme + Host + ':' + port, Realm, cfg);
+        client.Authenticate('', '');
+        return client.CollectMetadata();
+      }
+
+      // Honour the scanned port when there is one, otherwise cover the common pair.
+      const ports = TargetPort ? [TargetPort] : ['389', '636'];
+
+      for (let i = 0; i < ports.length; i++) {
+        try {
+          const metadata = tryPort(ports[i]);
+          if (metadata) {
+            Export(metadata);
+            break;
+          }
+        } catch (e) {
+          // port closed, wrong scheme, or bind refused - try the next one
+        }
+      }
+
+    args:
+      Host: "{{Host}}"
+      TargetPort: "{{Port}}"
+      Realm: "anonymous"
+
+    matchers:
+      - type: dsl
+        dsl:
+          - "success == true"
+# digest: 4a0a004730450220209ce0c906175d6edcc1f383b392883c6dbdca3539a122151018a4c6146a83f6022100939b2cf03e7651ed330cb8c456e2af8455e69dd4f2077dcc502c0870b0c74862:922c64590222798bb761d5b6d8e72950

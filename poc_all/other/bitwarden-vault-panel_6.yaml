@@ -1,0 +1,43 @@
+id: bitwarden-vault-panel
+
+info:
+  name: Bitwarden Web Vault Login Panel - Detect
+  author: ritikchaddha
+  severity: info
+  reference:
+    - https://bitwarden.com/
+  classification:
+    cpe: cpe:2.3:a:bitwarden:bitwarden:*:*:*:*:*:*:*:*
+  metadata:
+    verified: true
+    max-request: 1
+    vendor: bitwarden
+    product: bitwarden
+    shodan-query:
+      - title:"Bitwarden Web Vault"
+      - http.title:"bitwarden web vault"
+    fofa-query: title="bitwarden web vault"
+    google-query: intitle:"bitwarden web vault"
+  tags: panel,bitwarden,vault,detect,discovery
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}"
+
+    host-redirects: true
+    max-redirects: 2
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        part: body
+        words:
+          - 'Bitwarden Web Vault</title>'
+          - 'alt="Bitwarden'
+        condition: or
+
+      - type: status
+        status:
+          - 200
+# digest: 4a0a004730450220722f4764f47a897a574269154354b50f6b209b0ae7baa6b6b342c7898d81a1a5022100a64ae8e49af0fe76fde69468820efe52952db54c67be8303a5dcba56896662c2:922c64590222798bb761d5b6d8e72950
