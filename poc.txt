@@ -46301,6 +46301,7 @@
 ./poc_all/cve/CVE-2012-1835_8.yaml
 ./poc_all/cve/CVE-2012-1835_9.yaml
 ./poc_all/cve/CVE-2012-20001.yaml
+./poc_all/cve/CVE-2012-20003-custom_tables-b9959526-9ca8-42c2-8486-32ce7a4a162c.yaml
 ./poc_all/cve/CVE-2012-2109-7803f6d6c5c839bbb8afe67cbdd4ceb6.yaml
 ./poc_all/cve/CVE-2012-2109-buddypress-1a4cc739-0563-4ca2-931d-818a0c285257.yaml
 ./poc_all/cve/CVE-2012-2109-buddypress-1a4cc739-0563-4ca2-931d-818a0c285257_1.yaml
@@ -50023,6 +50024,7 @@
 ./poc_all/cve/CVE-2014-10016-a8001c736aa193df0fd50e5699f331bf.yaml
 ./poc_all/cve/CVE-2014-10016-usc_e_shop-d681fcaf-c7b3-496f-b0d8-a8ed48901cec.yaml
 ./poc_all/cve/CVE-2014-10016-usc_e_shop-d681fcaf-c7b3-496f-b0d8-a8ed48901cec_1.yaml
+./poc_all/cve/CVE-2014-10016-usc_e_shop-d681fcaf-c7b3-496f-b0d8-a8ed48901cec_2.yaml
 ./poc_all/cve/CVE-2014-10016.yaml
 ./poc_all/cve/CVE-2014-10016_1.yaml
 ./poc_all/cve/CVE-2014-10016_2.yaml
@@ -55730,6 +55732,7 @@
 ./poc_all/cve/CVE-2015-20106_1.yaml
 ./poc_all/cve/CVE-2015-20106_2.yaml
 ./poc_all/cve/CVE-2015-20106_3.yaml
+./poc_all/cve/CVE-2015-20123-aspose_doc_exporter-732ae100-4d85-4a26-96c6-3698ad99ae47.yaml
 ./poc_all/cve/CVE-2015-2039-3397821ae6e35d7d56b48efa5f3a13fc.yaml
 ./poc_all/cve/CVE-2015-2039-acobot-c77f6fff-8456-4979-90c3-52078ee12264.yaml
 ./poc_all/cve/CVE-2015-2039-acobot-c77f6fff-8456-4979-90c3-52078ee12264_1.yaml
