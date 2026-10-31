@@ -1,0 +1,21 @@
+id: easy-store
+info:
+  name: easy store
+  author: cn-kali-team
+  tags: detect,tech,easy store
+  severity: info
+  metadata:
+    fofa-query:
+    - app="joomla" && body="easy store"
+    product: easy store
+    vendor: joomshaper
+    verified: true
+http:
+- method: GET
+  path:
+  - '{{BaseURL}}/'
+  matchers:
+  - type: word
+    words:
+    - easy store
+    case-insensitive: true
