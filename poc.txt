@@ -593172,6 +593172,7 @@
 ./poc_high_quality/sql/hasura-graphql-psql-exec-7901_1.yaml
 ./poc_high_quality/sql/hasura-graphql-psql-exec-7902.yaml
 ./poc_high_quality/sql/hasura-graphql-psql-exec-7902_1.yaml
+./poc_high_quality/sql/header-based-blind-sqli3_1.yaml
 ./poc_high_quality/sql/header-blind-sql-injection3.yaml
 ./poc_high_quality/sql/header-blind-time-sql-injection.yaml
 ./poc_high_quality/sql/header-blind-time-sql-injection_1.yaml
