@@ -30907,6 +30907,7 @@
 ./poc_all/cve/CVE-2010-0738_2.yaml
 ./poc_all/cve/CVE-2010-0738_3.yaml
 ./poc_all/cve/CVE-2010-0738_4.yaml
+./poc_all/cve/CVE-2010-0738_5.yaml
 ./poc_all/cve/CVE-2010-0759.yaml
 ./poc_all/cve/CVE-2010-0759_1.yaml
 ./poc_all/cve/CVE-2010-0759_10.yaml
@@ -33779,6 +33780,7 @@
 ./poc_all/cve/CVE-2010-1428_2.yaml
 ./poc_all/cve/CVE-2010-1428_3.yaml
 ./poc_all/cve/CVE-2010-1428_4.yaml
+./poc_all/cve/CVE-2010-1428_5.yaml
 ./poc_all/cve/CVE-2010-1429.yaml
 ./poc_all/cve/CVE-2010-1429_1.yaml
 ./poc_all/cve/CVE-2010-1429_10.yaml
@@ -46940,6 +46942,7 @@
 ./poc_all/cve/CVE-2012-2920_1.yaml
 ./poc_all/cve/CVE-2012-2920_2.yaml
 ./poc_all/cve/CVE-2012-3152.yaml
+./poc_all/cve/CVE-2012-3152_1.yaml
 ./poc_all/cve/CVE-2012-3153.yaml
 ./poc_all/cve/CVE-2012-3153_1.yaml
 ./poc_all/cve/CVE-2012-3153_10.yaml
